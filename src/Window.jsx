@@ -1,0 +1,154 @@
+import React, { useState, useRef } from "react";
+import '98.css';
+
+
+// Windows 95 window husk with the standard three buttons and resizing capabilities.
+const Window = ({ title, children, topWindow, setTopWindow, onClose, icon, isMinimized, onMinimize }) => {
+
+    const [width, setWidth] = useState(400);
+    const [height, setHeight] = useState(300);
+
+    const [isMaximized, setIsMaximized] = useState(false);
+    const [position, setPosition] = useState({ x: 100, y: 100 });
+    const windowRef = useRef(null);
+
+    const onMouseDown = (e) => {
+        // Don't drag if the click was on a control button
+        if (e.target.closest(".title-bar-controls")) return;
+
+        e.preventDefault();
+        setTopWindow(title);
+
+        const startX = e.clientX - position.x;
+        const startY = e.clientY - position.y;
+
+        const onMouseMove = (e) => {
+            setPosition({
+                x: e.clientX - startX,
+                y: e.clientY - startY,
+            });
+        };
+
+        const onMouseUp = () => {
+            document.removeEventListener("mousemove", onMouseMove);
+            document.removeEventListener("mouseup", onMouseUp);
+        };
+
+        document.addEventListener("mousemove", onMouseMove);
+        document.addEventListener("mouseup", onMouseUp);
+    };
+
+    const handleMaximize = () => setIsMaximized(!isMaximized);
+
+    const startResize = (e, direction) => {
+        e.stopPropagation();
+        e.preventDefault();
+
+        const startX = e.clientX;
+        const startY = e.clientY;
+        const startWidth = windowRef.current.offsetWidth;
+        const startHeight = windowRef.current.offsetHeight;
+        const startPos = { ...position };
+
+        const onMouseMove = (e) => {
+            let newWidth = startWidth;
+            let newHeight = startHeight;
+            let newX = startPos.x;
+            let newY = startPos.y;
+
+            // Minimum constraints
+            const MIN_WIDTH = 200;
+            const MIN_HEIGHT = 150;
+
+            if (direction.includes('right')) {
+                newWidth = Math.max(MIN_WIDTH, startWidth + (e.clientX - startX));
+            }
+            if (direction.includes('left')) {
+                const potentialWidth = startWidth - (e.clientX - startX);
+                if (potentialWidth >= MIN_WIDTH) {
+                    newWidth = potentialWidth;
+                    newX = startPos.x + (e.clientX - startX);
+                }
+            }
+            if (direction.includes('bottom')) {
+                newHeight = Math.max(MIN_HEIGHT, startHeight + (e.clientY - startY));
+            }
+            if (direction.includes('top')) {
+                const potentialHeight = startHeight - (e.clientY - startY);
+                if (potentialHeight >= MIN_HEIGHT) {
+                    newHeight = potentialHeight;
+                    newY = startPos.y + (e.clientY - startY);
+                }
+            }
+
+            setPosition({ x: newX, y: newY });
+            setWidth(newWidth);
+            setHeight(newHeight);
+        };
+
+        const onMouseUp = () => {
+            document.removeEventListener("mousemove", onMouseMove);
+            document.removeEventListener("mouseup", onMouseUp);
+        };
+
+        document.addEventListener("mousemove", onMouseMove);
+        document.addEventListener("mouseup", onMouseUp);
+    };
+
+
+    return (
+
+
+        <div
+            ref={windowRef}
+            className="window"
+            style={{
+                zIndex: topWindow === title ? 10 : 1,
+                width: isMaximized ? '100%' : width,
+                height: isMaximized ? '100%' : height,
+                transform: `translate(${position.x}px, ${position.y}px)`,
+                position: 'absolute',
+                display: isMinimized ? 'none' : 'flex',
+            }}
+        >
+            <div className="resize-handle top-left" onMouseDown={(e) => startResize(e, 'top-left')} />
+            <div className="resize-handle top-right" onMouseDown={(e) => startResize(e, 'top-right')} />
+            <div className="resize-handle bottom-left" onMouseDown={(e) => startResize(e, 'bottom-left')} />
+            <div className="resize-handle bottom-right" onMouseDown={(e) => startResize(e, 'bottom-right')} />
+
+            {/* Optional: middle edges for vertical/horizontal resize */}
+            <div className="resize-handle top" onMouseDown={(e) => startResize(e, 'top')} />
+            <div className="resize-handle bottom" onMouseDown={(e) => startResize(e, 'bottom')} />
+            <div className="resize-handle left" onMouseDown={(e) => startResize(e, 'left')} />
+            <div className="resize-handle right" onMouseDown={(e) => startResize(e, 'right')} />
+
+            <div className="title-bar" onMouseDown={onMouseDown}>
+                <div className="title-bar-text">{title}</div>
+                <div className="title-bar-controls">
+                    <button
+                        aria-label="Minimize"
+                        // prevent drag
+                        onMouseDown={(e) => e.stopPropagation()}
+
+                        // trigger minimize
+                        onClick={() => onMinimize && onMinimize()}
+                    ></button>
+                    <button
+                        aria-label="Maximize"
+                        onMouseDown={(e) => e.stopPropagation()}
+                        onClick={handleMaximize}
+                    ></button>
+                    <button
+                        aria-label="Close"
+                        onMouseDown={(e) => e.stopPropagation()}
+                        onClick={onClose}
+                    ></button>
+                </div>
+
+            </div>
+            <div className="window-body">{children}</div>
+        </div>
+    );
+};
+
+export default Window;
