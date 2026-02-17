@@ -108,3 +108,99 @@
     min-height: 0;
     /* Important for flexbox scrolling */
 }
+
+/* Display Properties Styles */
+.display-properties {
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+    font-size: 11px;
+}
+
+.field-row-stacked {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.field-row-stacked label {
+    font-weight: bold;
+}
+
+.field-row-stacked select {
+    width: 100%;
+    padding: 2px;
+}
+
+.color-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 40px);
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.color-swatch {
+    width: 40px;
+    height: 30px;
+    border: 2px solid #808080;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.color-swatch:hover {
+    border: 2px solid #000;
+}
+
+.color-swatch.selected {
+    border: 3px solid #000;
+    outline: 2px solid #fff;
+    outline-offset: -5px;
+}
+
+.preview-section {
+    margin: 15px 0;
+}
+
+.preview-section>label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.monitor-preview {
+    width: 180px;
+    height: 140px;
+    background: #c0c0c0;
+    border: 2px solid #808080;
+    padding: 15px;
+    margin: 0 auto;
+    box-shadow: inset -1px -1px 0 #fff, inset 1px 1px 0 #000;
+}
+
+.monitor-screen {
+    width: 100%;
+    height: 100%;
+    border: 2px solid #000;
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.button-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.button-row button {
+    min-width: 75px;
+}
+
+/* Taskbar Clock */
+.taskbar-clock {
+    margin-left: auto;
+    padding: 4px 8px;
+    border: 2px inset #fff;
+    background: #c0c0c0;
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+    font-size: 11px;
+    line-height: 1;
+    user-select: none;
+}

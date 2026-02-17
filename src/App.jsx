@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import Window from "./Window.jsx";
 import Content1 from "./Content1.jsx";
+import DisplayProperties from "./DisplayProperties.jsx";
 import DesktopIcon from "./DesktopIcon.jsx";
+import TaskbarClock from "./TaskbarClock.jsx";
 import './App.css'
 
 import profileIcon from "./icons/profile_icon.png";
@@ -10,9 +12,27 @@ function App() {
   const [topWindow, setTopWindow] = useState(null);
   const [openWindows, setOpenWindows] = useState([]);
   const [minimized, setMinimized] = useState([]);
+  const [background, setBackground] = useState('teal');
+
+  const handleBackgroundChange = (newBackground) => {
+    setBackground(newBackground);
+  };
 
   const availableWindows = [
-    { id: 1, title: "Useless Buttons", icon: profileIcon, content: <Content1 /> }];
+    { id: 1, title: "Useless Buttons", icon: profileIcon, content: <Content1 /> },
+    {
+      id: 2,
+      title: "Display Properties",
+      icon: profileIcon,
+      content: (
+        <DisplayProperties
+          currentBackground={background}
+          onApply={handleBackgroundChange}
+          onClose={() => handleClose(2)}
+        />
+      )
+    },
+  ];
 
 
   const handleOpenWindow = (win) => {
@@ -36,7 +56,7 @@ function App() {
   };
 
   return (
-    <div className="desktop">
+    <div className="desktop" style={{ background: background }}>
       {/* Desktop Icons */}
       {availableWindows.map((win, idx) => (
         <DesktopIcon
@@ -100,6 +120,7 @@ function App() {
             </div>
           );
         })}
+        <TaskbarClock />
       </div>
     </div>
   );
