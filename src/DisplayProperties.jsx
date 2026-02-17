@@ -3,6 +3,7 @@ import '98.css';
 
 const DisplayProperties = ({ currentBackground, onApply, onClose }) => {
     const [selectedBg, setSelectedBg] = useState(currentBackground);
+    const [selectedPattern, setSelectedPattern] = useState('none');
 
     const colorOptions = [
         { id: 'teal', color: 'teal', name: 'Teal (Classic)' },
@@ -14,6 +15,29 @@ const DisplayProperties = ({ currentBackground, onApply, onClose }) => {
         { id: 'black', color: '#000000', name: 'Black' },
         { id: 'gray', color: '#808080', name: 'Gray' },
     ];
+
+    const patternOptions = [
+        { id: 'none', name: '(None)', value: null },
+        { id: 'pattern1', name: 'Pattern 1', value: 'url(/src/bg_images/pattern1.svg)' },
+    ];
+
+    const handlePatternChange = (e) => {
+        const pattern = patternOptions.find(p => p.id === e.target.value);
+        setSelectedPattern(pattern.id);
+
+        if (pattern.value) {
+            // Pattern selected - use tiled pattern
+            setSelectedBg(pattern.value);
+        } else {
+            // No pattern - reset to teal default
+            setSelectedBg('teal');
+        }
+    };
+
+    const handleColorClick = (color) => {
+        setSelectedPattern('none');
+        setSelectedBg(color);
+    };
 
     const handleApply = () => {
         onApply(selectedBg);
@@ -35,8 +59,16 @@ const DisplayProperties = ({ currentBackground, onApply, onClose }) => {
 
             <div className="field-row-stacked" style={{ marginBottom: '10px' }}>
                 <label htmlFor="pattern-select">Pattern:</label>
-                <select id="pattern-select" disabled>
-                    <option>(None)</option>
+                <select
+                    id="pattern-select"
+                    value={selectedPattern}
+                    onChange={handlePatternChange}
+                >
+                    {patternOptions.map(pattern => (
+                        <option key={pattern.id} value={pattern.id}>
+                            {pattern.name}
+                        </option>
+                    ))}
                 </select>
             </div>
 
@@ -48,7 +80,7 @@ const DisplayProperties = ({ currentBackground, onApply, onClose }) => {
                             key={option.id}
                             className={`color-swatch ${selectedBg === option.color ? 'selected' : ''}`}
                             style={{ backgroundColor: option.color }}
-                            onClick={() => setSelectedBg(option.color)}
+                            onClick={() => handleColorClick(option.color)}
                             title={option.name}
                         />
                     ))}

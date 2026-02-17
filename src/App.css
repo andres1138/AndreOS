@@ -26,6 +26,10 @@
     height: 100vh;
     position: relative;
     background: teal;
+    background-repeat: repeat;
+    /* Tile the pattern */
+    background-size: auto;
+    /* Use original SVG size */
     overflow: hidden;
 }
 
