@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Window from "./Window.jsx";
 import Content1 from "./Content1.jsx";
+import Profile from './Profile.jsx';
 import DisplayProperties from "./DisplayProperties.jsx";
 import DesktopIcon from "./DesktopIcon.jsx";
 import TaskbarClock from "./TaskbarClock.jsx";
@@ -32,6 +33,9 @@ function App() {
         />
       )
     },
+
+    { id: 1, title: "My Profile", icon: profileIcon, content: <Profile /> }
+
   ];
 
 

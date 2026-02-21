@@ -1,0 +1,44 @@
+.profile {
+    display: flex;
+    background-color: antiquewhite;
+
+}
+
+.picFrame {
+    background-color: darkslategray;
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    margin: 2px auto;
+    padding: 5px;
+}
+
+.contactInfo {
+    border: 1px solid black;
+    padding: 5px;
+    margin: 2px auto;
+}
+
+dt,
+dd {
+    display: inline;
+}
+
+dt {
+    font-weight: bold;
+}
+
+dd {
+    margin: 0;
+
+}
+
+dd+dt::before {
+    content: '\A';
+    white-space: pre;
+}
+
+dd+dd::before {
+    content: ',';
+    font-weight: normal;
+}
