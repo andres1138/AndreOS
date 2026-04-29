@@ -23,7 +23,11 @@ const Profile = () => {
                 </dl>
             </div>
 
-
+            <div className="profileText">
+                <p>jhgfjsdhfgdjsfgjsdfhjsdfhgdhfjsdfhjsdhgjsdhfgjsdhfjsdhf
+                    jhdsfjdhsgfjdhsgfjsdghjfgjsdfgdjsfgdjsfgdjsfhgdjsfhgsj
+                </p>
+            </div>
 
         </div>
 

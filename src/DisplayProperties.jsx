@@ -19,6 +19,7 @@ const DisplayProperties = ({ currentBackground, onApply, onClose }) => {
     const patternOptions = [
         { id: 'none', name: '(None)', value: null },
         { id: 'pattern1', name: 'Pattern 1', value: 'url(/src/bg_images/pattern1.svg)' },
+        { id: 'pattern2', name: 'Pattern 2', value: 'url(/src/bg_images/pattern2.svg)' },
     ];
 
     const handlePatternChange = (e) => {

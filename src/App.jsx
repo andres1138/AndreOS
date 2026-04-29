@@ -2,12 +2,16 @@ import { useState } from 'react'
 import Window from "./Window.jsx";
 import Content1 from "./Content1.jsx";
 import Profile from './Profile.jsx';
+import Plinko from './Plinko.jsx';
 import DisplayProperties from "./DisplayProperties.jsx";
 import DesktopIcon from "./DesktopIcon.jsx";
 import TaskbarClock from "./TaskbarClock.jsx";
 import './App.css'
 
 import profileIcon from "./icons/profile_icon.png";
+import profile_Icon from "./icons/ProfileIcon.png";
+import displayProperties from "./icons/DisplayProperties.png";
+import plinkoIcon from "./icons/PlinkoIcon.png";
 
 function App() {
   const [topWindow, setTopWindow] = useState(null);
@@ -20,22 +24,55 @@ function App() {
   };
 
   const availableWindows = [
-    { id: 1, title: "Useless Buttons", icon: profileIcon, content: <Content1 /> },
+    {
+      id: 1,
+      title: "Useless Buttons",
+      icon: profileIcon,
+      content: <Content1 />,
+      resizable: true,
+      defaultWidth: 400,
+      defaultHeight: 300,
+      minWidth: 250,
+      minHeight: 200,
+    },
     {
       id: 2,
       title: "Display Properties",
-      icon: profileIcon,
+      icon: displayProperties,
       content: (
         <DisplayProperties
           currentBackground={background}
           onApply={handleBackgroundChange}
           onClose={() => handleClose(2)}
         />
-      )
+      ),
+
+      resizable: false,
+      defaultWidth: 380,
+      defaultHeight: 420,
     },
-
-    { id: 1, title: "My Profile", icon: profileIcon, content: <Profile /> }
-
+    {
+      id: 3,
+      title: "My Profile",
+      icon: profile_Icon,
+      content: <Profile />,
+      resizable: true,
+      defaultWidth: 520,
+      defaultHeight: 400,
+      minWidth: 350,
+      minHeight: 300,
+    },
+    {
+      id: 4,
+      title: "Plinko",
+      icon: plinkoIcon,
+      content: <Plinko />,
+      resizable: true,
+      defaultWidth: 850,
+      defaultHeight: 600,
+      minWidth: 700,
+      minHeight: 500,
+    },
   ];
 
 
@@ -86,6 +123,13 @@ function App() {
           onClose={() => handleClose(window.id)}
           onMinimize={() => handleMinimize(window.id)}
           isMinimized={minimized.includes(window.id)}
+          resizable={window.resizable}
+          defaultWidth={window.defaultWidth}
+          defaultHeight={window.defaultHeight}
+          minWidth={window.minWidth}
+          maxWidth={window.maxWidth}
+          minHeight={window.minHeight}
+          maxHeight={window.maxHeight}
         >
           {window.content}
         </Window>
@@ -106,13 +150,14 @@ function App() {
               style={{
                 display: "flex",
                 alignItems: "center",
-                padding: "2px 6px",
+                padding: "0px 6px",
                 marginRight: "4px",
-                border: "2px outset #fff", // 3D Windows 95 button effect
+                border: "1px solid #808080",
                 background: "#c0c0c0",
                 cursor: "pointer",
                 userSelect: "none",
-                height: "32px",
+                height: "22px",
+                boxSizing: "border-box",
               }}
             >
               <img

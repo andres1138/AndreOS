@@ -1,0 +1,481 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* Remove window-body padding & scrollbars when hosting Plinko */
+.window-body:has(.plinko-app) {
+    padding: 0;
+    overflow: hidden;
+}
+
+/* ========== LAYOUT ========== */
+.plinko-app {
+    /* Self-contained styling — no global leaks */
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #ffffff;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    --bg-primary: #0f1923;
+    --bg-secondary: #1a2c38;
+    --bg-tertiary: #213743;
+    --bg-card: #0e1e2b;
+    --text-primary: #ffffff;
+    --text-secondary: #b1bad3;
+    --text-muted: #557086;
+    --accent-green: #00e701;
+    --accent-red: #ff4444;
+    --accent-orange: #ff9500;
+    --accent-yellow: #ffd000;
+    --border: rgba(255, 255, 255, 0.06);
+    --glow-green: rgba(0, 231, 1, 0.3);
+    --glow-red: rgba(255, 68, 68, 0.3);
+
+    display: flex;
+    gap: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    overflow: hidden;
+    background: var(--bg-secondary);
+    animation: plinkoFadeIn 0.6s ease;
+}
+
+.plinko-app *,
+.plinko-app *::before,
+.plinko-app *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Reset 98.css global button/input/select styles */
+.plinko-app button,
+.plinko-app input,
+.plinko-app select {
+    all: unset;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    cursor: pointer;
+}
+
+.plinko-app input {
+    cursor: text;
+}
+
+/* ========== SIDEBAR ========== */
+.plinko-app .sidebar {
+    width: 240px;
+    min-width: 240px;
+    background: var(--bg-secondary);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+}
+
+.plinko-app .sidebar::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+.plinko-app .sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+.plinko-app .sidebar-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.3px;
+}
+
+.plinko-app .sidebar-header .logo-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent-green), #00b300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+/* ========== TABS ========== */
+.plinko-app .tabs {
+    display: flex;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    padding: 3px;
+    gap: 2px;
+}
+
+.plinko-app .tab {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.plinko-app .tab.active {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.plinko-app .tab:hover:not(.active) {
+    color: var(--text-secondary);
+}
+
+/* ========== FORM CONTROLS ========== */
+.plinko-app .control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.plinko-app .control-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.plinko-app .control-input-wrapper {
+    display: flex;
+    align-items: center;
+    background: var(--bg-primary);
+    border-radius: 8px;
+    border: 2px solid var(--border);
+    overflow: hidden;
+    transition: border-color 0.2s;
+}
+
+.plinko-app .control-input-wrapper:focus-within {
+    border-color: var(--accent-green);
+}
+
+.plinko-app .control-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 12px;
+    outline: none;
+    width: 100%;
+}
+
+.plinko-app .control-input::placeholder {
+    color: var(--text-muted);
+}
+
+.plinko-app .input-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.plinko-app .input-btn:hover {
+    color: var(--text-primary);
+}
+
+/* ========== RISK SELECT ========== */
+.plinko-app .risk-selector {
+    display: flex;
+    gap: 6px;
+}
+
+.plinko-app .risk-btn {
+    flex: 1;
+    padding: 8px;
+    border-radius: 6px;
+    border: 2px solid var(--border);
+    background: var(--bg-primary);
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: capitalize;
+}
+
+.plinko-app .risk-btn.active {
+    border-color: var(--accent-green);
+    color: var(--accent-green);
+    background: rgba(0, 231, 1, 0.08);
+}
+
+.plinko-app .risk-btn:hover:not(.active) {
+    border-color: var(--text-muted);
+    color: var(--text-secondary);
+}
+
+/* ========== ROWS SELECTOR ========== */
+.plinko-app .rows-selector {
+    position: relative;
+}
+
+.plinko-app .rows-select {
+    width: 100%;
+    background: var(--bg-primary);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 12px;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: border-color 0.2s;
+}
+
+.plinko-app .rows-select:focus {
+    border-color: var(--accent-green);
+}
+
+.plinko-app .rows-selector::after {
+    content: '▾';
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+    font-size: 14px;
+}
+
+/* ========== BET BUTTON ========== */
+.plinko-app .bet-button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    background: var(--accent-green);
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.plinko-app .bet-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.plinko-app .bet-button:hover::before {
+    left: 100%;
+}
+
+.plinko-app .bet-button:hover {
+    filter: brightness(1.15);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px var(--glow-green);
+}
+
+.plinko-app .bet-button:active {
+    transform: translateY(0);
+}
+
+/* ========== STATS ========== */
+.plinko-app .stats-section {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+}
+
+.plinko-app .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.plinko-app .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.plinko-app .stat-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.plinko-app .stat-value.positive {
+    color: var(--accent-green);
+}
+
+.plinko-app .stat-value.negative {
+    color: var(--accent-red);
+}
+
+/* ========== GAME AREA ========== */
+.plinko-app .game-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-primary);
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.plinko-app .canvas-container {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+}
+
+.plinko-app .canvas-container canvas {
+    display: block;
+}
+
+/* ========== MULTIPLIER SLOTS ========== */
+.plinko-app .multiplier-row {
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    padding: 6px 20px 16px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.plinko-app .multiplier-slot {
+    padding: 6px 2px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 800;
+    text-align: center;
+    min-width: 38px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.plinko-app .multiplier-slot.tier-0 {
+    background: #ff4444;
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(255, 68, 68, 0.4);
+}
+
+.plinko-app .multiplier-slot.tier-1 {
+    background: #ff6b00;
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(255, 107, 0, 0.3);
+}
+
+.plinko-app .multiplier-slot.tier-2 {
+    background: #ff9500;
+    color: #000;
+    box-shadow: 0 2px 10px rgba(255, 149, 0, 0.3);
+}
+
+.plinko-app .multiplier-slot.tier-3 {
+    background: #ffd000;
+    color: #000;
+    box-shadow: 0 2px 10px rgba(255, 208, 0, 0.3);
+}
+
+.plinko-app .multiplier-slot.tier-4 {
+    background: #c8e600;
+    color: #000;
+}
+
+.plinko-app .multiplier-slot.hit {
+    animation: slotHit 0.5s ease;
+}
+
+@keyframes slotHit {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); filter: brightness(1.5); }
+    100% { transform: scale(1); }
+}
+
+@keyframes plinkoFadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== LAST RESULTS ========== */
+.plinko-app .last-results {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+.plinko-app .result-chip {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    animation: chipIn 0.3s ease;
+}
+
+.plinko-app .result-chip.win {
+    background: rgba(0, 231, 1, 0.15);
+    color: var(--accent-green);
+}
+
+.plinko-app .result-chip.lose {
+    background: rgba(255, 68, 68, 0.15);
+    color: var(--accent-red);
+}
+
+@keyframes chipIn {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+}

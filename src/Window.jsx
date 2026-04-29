@@ -2,11 +2,35 @@ import React, { useState, useRef } from "react";
 import '98.css';
 
 
-// Windows 95 window husk with the standard three buttons and resizing capabilities.
-const Window = ({ title, children, topWindow, setTopWindow, onClose, icon, isMinimized, onMinimize }) => {
+// Windows 95 window husk with the standard three buttons and optional resizing capabilities.
+// Props:
+//   resizable     - bool (default true): whether the window can be resized by the user
+//   defaultWidth  - number: initial width in px (default 400)
+//   defaultHeight - number: initial height in px (default 300)
+//   minWidth      - number: minimum resize width (default 200)
+//   maxWidth      - number: maximum resize width (default Infinity)
+//   minHeight     - number: minimum resize height (default 150)
+//   maxHeight     - number: maximum resize height (default Infinity)
+const Window = ({
+    title,
+    children,
+    topWindow,
+    setTopWindow,
+    onClose,
+    icon,
+    isMinimized,
+    onMinimize,
+    resizable = true,
+    defaultWidth = 400,
+    defaultHeight = 300,
+    minWidth = 200,
+    maxWidth = Infinity,
+    minHeight = 150,
+    maxHeight = Infinity,
+}) => {
 
-    const [width, setWidth] = useState(400);
-    const [height, setHeight] = useState(300);
+    const [width, setWidth] = useState(defaultWidth);
+    const [height, setHeight] = useState(defaultHeight);
 
     const [isMaximized, setIsMaximized] = useState(false);
     const [position, setPosition] = useState({ x: 100, y: 100 });
@@ -56,26 +80,22 @@ const Window = ({ title, children, topWindow, setTopWindow, onClose, icon, isMin
             let newX = startPos.x;
             let newY = startPos.y;
 
-            // Minimum constraints
-            const MIN_WIDTH = 200;
-            const MIN_HEIGHT = 150;
-
             if (direction.includes('right')) {
-                newWidth = Math.max(MIN_WIDTH, startWidth + (e.clientX - startX));
+                newWidth = Math.min(maxWidth, Math.max(minWidth, startWidth + (e.clientX - startX)));
             }
             if (direction.includes('left')) {
                 const potentialWidth = startWidth - (e.clientX - startX);
-                if (potentialWidth >= MIN_WIDTH) {
+                if (potentialWidth >= minWidth && potentialWidth <= maxWidth) {
                     newWidth = potentialWidth;
                     newX = startPos.x + (e.clientX - startX);
                 }
             }
             if (direction.includes('bottom')) {
-                newHeight = Math.max(MIN_HEIGHT, startHeight + (e.clientY - startY));
+                newHeight = Math.min(maxHeight, Math.max(minHeight, startHeight + (e.clientY - startY)));
             }
             if (direction.includes('top')) {
                 const potentialHeight = startHeight - (e.clientY - startY);
-                if (potentialHeight >= MIN_HEIGHT) {
+                if (potentialHeight >= minHeight && potentialHeight <= maxHeight) {
                     newHeight = potentialHeight;
                     newY = startPos.y + (e.clientY - startY);
                 }
@@ -97,8 +117,6 @@ const Window = ({ title, children, topWindow, setTopWindow, onClose, icon, isMin
 
 
     return (
-
-
         <div
             ref={windowRef}
             className="window"
@@ -111,16 +129,19 @@ const Window = ({ title, children, topWindow, setTopWindow, onClose, icon, isMin
                 display: isMinimized ? 'none' : 'flex',
             }}
         >
-            <div className="resize-handle top-left" onMouseDown={(e) => startResize(e, 'top-left')} />
-            <div className="resize-handle top-right" onMouseDown={(e) => startResize(e, 'top-right')} />
-            <div className="resize-handle bottom-left" onMouseDown={(e) => startResize(e, 'bottom-left')} />
-            <div className="resize-handle bottom-right" onMouseDown={(e) => startResize(e, 'bottom-right')} />
-
-            {/* Optional: middle edges for vertical/horizontal resize */}
-            <div className="resize-handle top" onMouseDown={(e) => startResize(e, 'top')} />
-            <div className="resize-handle bottom" onMouseDown={(e) => startResize(e, 'bottom')} />
-            <div className="resize-handle left" onMouseDown={(e) => startResize(e, 'left')} />
-            <div className="resize-handle right" onMouseDown={(e) => startResize(e, 'right')} />
+            {/* Only render resize handles when the window is resizable */}
+            {resizable && (
+                <>
+                    <div className="resize-handle top-left" onMouseDown={(e) => startResize(e, 'top-left')} />
+                    <div className="resize-handle top-right" onMouseDown={(e) => startResize(e, 'top-right')} />
+                    <div className="resize-handle bottom-left" onMouseDown={(e) => startResize(e, 'bottom-left')} />
+                    <div className="resize-handle bottom-right" onMouseDown={(e) => startResize(e, 'bottom-right')} />
+                    <div className="resize-handle top" onMouseDown={(e) => startResize(e, 'top')} />
+                    <div className="resize-handle bottom" onMouseDown={(e) => startResize(e, 'bottom')} />
+                    <div className="resize-handle left" onMouseDown={(e) => startResize(e, 'left')} />
+                    <div className="resize-handle right" onMouseDown={(e) => startResize(e, 'right')} />
+                </>
+            )}
 
             <div className="title-bar" onMouseDown={onMouseDown}>
                 <div className="title-bar-text">{title}</div>
@@ -129,14 +150,14 @@ const Window = ({ title, children, topWindow, setTopWindow, onClose, icon, isMin
                         aria-label="Minimize"
                         // prevent drag
                         onMouseDown={(e) => e.stopPropagation()}
-
                         // trigger minimize
                         onClick={() => onMinimize && onMinimize()}
                     ></button>
                     <button
                         aria-label="Maximize"
                         onMouseDown={(e) => e.stopPropagation()}
-                        onClick={handleMaximize}
+                        onClick={resizable ? handleMaximize : undefined}
+                        disabled={!resizable}
                     ></button>
                     <button
                         aria-label="Close"
