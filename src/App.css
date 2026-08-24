@@ -208,3 +208,79 @@
     line-height: 1;
     user-select: none;
 }
+
+/* Desktop Icons Styling */
+.desktop-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 4px;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    transition: transform 0.05s ease;
+    user-select: none;
+}
+
+.desktop-icon.pressed {
+    transform: scale(0.95) translateY(1px);
+}
+
+.desktop-icon .icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    margin-bottom: 2px;
+    width: 36px;
+    height: 36px;
+}
+
+.desktop-icon .icon-image {
+    width: 32px;
+    height: 32px;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+}
+
+.desktop-icon.selected .icon-image {
+    filter: drop-shadow(0px 0px 1px #000080) brightness(0.85) contrast(1.1);
+}
+
+.desktop-icon.selected .icon-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background-color: #000080;
+    mix-blend-mode: multiply;
+    opacity: 0.45;
+    pointer-events: none;
+    border-radius: 2px;
+}
+
+.desktop-icon .icon-title {
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+    font-size: 11px;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);
+    padding: 1px 4px;
+    margin-top: 2px;
+    border: 1px solid transparent;
+    word-break: break-word;
+    border-radius: 1px;
+    line-height: 1.2;
+    text-align: center;
+    max-width: 72px;
+}
+
+.desktop-icon.selected .icon-title {
+    background-color: #000080;
+    color: #ffffff;
+    text-shadow: none;
+    border: 1px dotted #ffffff;
+}

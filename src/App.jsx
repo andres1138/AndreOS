@@ -8,9 +8,9 @@ import DesktopIcon from "./DesktopIcon.jsx";
 import TaskbarClock from "./TaskbarClock.jsx";
 import './App.css'
 
-import profileIcon from "./icons/profile_icon.png";
-import profile_Icon from "./icons/ProfileIcon.png";
-import displayProperties from "./icons/DisplayProperties.png";
+import profileIcon from "./icons/UselessButtonsIcon.png";
+import profile_Icon from "./icons/ProfileIconNew.png";
+import displayProperties from "./icons/DisplayPropertiesNew.png";
 import plinkoIcon from "./icons/PlinkoIcon.png";
 
 function App() {
@@ -18,6 +18,11 @@ function App() {
   const [openWindows, setOpenWindows] = useState([]);
   const [minimized, setMinimized] = useState([]);
   const [background, setBackground] = useState('teal');
+  const [selectedIconId, setSelectedIconId] = useState(null);
+
+  const handleBackgroundClick = () => {
+    setSelectedIconId(null);
+  };
 
   const handleBackgroundChange = (newBackground) => {
     setBackground(newBackground);
@@ -97,20 +102,27 @@ function App() {
   };
 
   return (
-    <div className="desktop" style={{ background: background }}>
+    <div className="desktop" style={{ background: background }} onClick={handleBackgroundClick}>
       {/* Desktop Icons */}
       {availableWindows.map((win, idx) => (
         <DesktopIcon
           key={win.id}
+          id={win.id}
           title={win.title}
           icon={win.icon}
+          isSelected={selectedIconId === win.id}
+          onSelect={(id) => setSelectedIconId(id)}
           // 100px apart horizontally
           initialX={20 + idx * 100}
           // same top row
           initialY={20}
-          onDoubleClick={() => handleOpenWindow(win)}
+          onDoubleClick={() => {
+            setSelectedIconId(win.id);
+            handleOpenWindow(win);
+          }}
         />
       ))}
+
 
 
       {openWindows.map((window) => (

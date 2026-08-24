@@ -455,6 +455,14 @@
     gap: 4px;
     flex-wrap: wrap;
     margin-top: 4px;
+    max-height: 56px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.plinko-app .last-results::-webkit-scrollbar {
+    display: none;
 }
 
 .plinko-app .result-chip {

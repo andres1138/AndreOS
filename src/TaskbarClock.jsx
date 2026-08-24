@@ -6,7 +6,8 @@ const TaskbarClock = () => {
     useEffect(() => {
         const timer = setInterval(() => {
             setTime(new Date());
-        }, 1000); // Update every second
+            // Update every second
+        }, 1000)
 
         return () => clearInterval(timer);
     }, []);
