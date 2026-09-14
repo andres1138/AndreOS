@@ -1,63 +1,234 @@
 .profile {
-    font-family: "Roboto", sans-serif;
-    font-style: normal;
-    font-variation-settings:
-        "wdth" 100;
+    font-family: "Times New Roman", Times, serif;
 
     background-color: antiquewhite;
 
-    /* Magazine layout: two columns on top, full-width text on bottom */
+    color: #000;
+
     display: grid;
     grid-template-columns: 120px 1fr;
     grid-template-rows: auto auto;
     grid-template-areas:
-        "pic   contact"
-        "text  text";
+        "pic contact"
+        "text text";
+
     gap: 8px;
     padding: 10px;
+
+    box-sizing: border-box;
+
+    font-size: 14px;
 }
+
+
+/* -------------------------
+   PHOTO
+------------------------- */
 
 .picFrame {
     grid-area: pic;
-    background-color: darkslategray;
-    border: 1px solid black;
+
     width: 100px;
     height: 100px;
-    padding: 5px;
+
+    box-sizing: border-box;
+
+    background-color: darkslategray;
+
+    border: 2px inset #d0d0d0;
+
+    padding: 4px;
 }
+
+.picPlaceholder {
+    width: 100%;
+    height: 100%;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #808080;
+
+    color: #ffffff;
+
+    border: 1px solid #000;
+
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+}
+
+
+/* -------------------------
+   CONTACT INFORMATION
+------------------------- */
 
 .contactInfo {
     grid-area: contact;
-    border: 1px solid black;
+
+    border: 1px solid #000;
+
+    background-color: #fff8e8;
+
     padding: 5px;
+
+    box-sizing: border-box;
 }
 
-.profileText {
-    grid-area: text;
-    border: 1px solid black;
-    padding: 5px;
+.sectionTitle {
+    background-color: #000080;
+
+    color: white;
+
+    font-family: "MS Sans Serif", "Arial", sans-serif;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    padding: 2px 4px;
+
+    margin: -5px -5px 7px -5px;
 }
 
-dt,
-dd {
+.contactInfo dl {
+    margin: 0;
+}
+
+.contactInfo dt {
     display: inline;
-}
 
-dt {
     font-weight: bold;
 }
 
-dd {
+.contactInfo dd {
+    display: inline;
+
+    margin: 0 0 0 4px;
+}
+
+.contactInfo dt:not(:first-of-type)::before {
+    content: "";
+    display: block;
+}
+
+
+/* -------------------------
+   MAIN PROFILE
+------------------------- */
+
+.profileText {
+    grid-area: text;
+
+    border: 1px solid #000;
+
+    background-color: #fff8e8;
+
+    padding: 8px;
+
+    box-sizing: border-box;
+
+    line-height: 1.35;
+}
+
+.profileText h2 {
+    font-family: "Times New Roman", Times, serif;
+
+    font-size: 24px;
+
+    margin: 0 0 2px 0;
+}
+
+.profileText .subtitle {
+    margin: 0 0 8px 0;
+
+    font-style: italic;
+
+    font-size: 14px;
+}
+
+.profileText hr {
+    border: 0;
+
+    border-top: 1px solid #000;
+
+    margin: 8px 0;
+}
+
+.profileText p {
+    margin: 8px 0;
+}
+
+
+/* -------------------------
+   SKILLS / INFORMATION BOXES
+------------------------- */
+
+.infoSection {
+    border: 1px solid #000;
+
+    margin-top: 12px;
+
+    padding: 5px;
+
+    background-color: antiquewhite;
+}
+
+.infoSection .sectionTitle {
+    margin: -5px -5px 8px -5px;
+}
+
+.skillColumns {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+}
+
+.skillColumns h3 {
+    font-family: "Arial", sans-serif;
+
+    font-size: 11px;
+
+    margin: 2px 0 4px 0;
+
+    text-decoration: underline;
+}
+
+.skillColumns ul,
+.exploringList {
     margin: 0;
 
+    padding-left: 20px;
 }
 
-dd+dt::before {
-    content: '\A';
-    white-space: pre;
+.skillColumns li,
+.exploringList li {
+    margin-bottom: 2px;
 }
 
-dd+dd::before {
-    content: ',';
-    font-weight: normal;
+
+/* -------------------------
+   SMALL SCREENS
+------------------------- */
+
+@media (max-width: 500px) {
+
+    .profile {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "pic"
+            "contact"
+            "text";
+    }
+
+    .picFrame {
+        margin: 0 auto;
+    }
+
+    .skillColumns {
+        grid-template-columns: 1fr;
+    }
 }
