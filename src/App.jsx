@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Window from "./Window.jsx";
 import Content1 from "./Content1.jsx";
+import Contact from './Contact.jsx';
 import Profile from './Profile.jsx';
 import Plinko from './Plinko.jsx';
 import DisplayProperties from "./DisplayProperties.jsx";
@@ -10,6 +11,7 @@ import './App.css'
 
 import profileIcon from "./icons/UselessButtonsIcon.png";
 import profile_Icon from "./icons/ProfileIconNew.png";
+import contact_icon from "./icons/contact.png"
 import displayProperties from "./icons/DisplayPropertiesNew.png";
 import plinkoIcon from "./icons/PlinkoIcon.png";
 
@@ -72,6 +74,18 @@ function App() {
       title: "Plinko",
       icon: plinkoIcon,
       content: <Plinko />,
+      resizable: true,
+      defaultWidth: 850,
+      defaultHeight: 600,
+      minWidth: 700,
+      minHeight: 500,
+    },
+
+    {
+      id: 5,
+      title: "Contact",
+      icon: contact_icon,
+      content: <Contact />,
       resizable: true,
       defaultWidth: 850,
       defaultHeight: 600,
