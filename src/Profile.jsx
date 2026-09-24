@@ -10,15 +10,15 @@ const Profile = () => {
                 <div className="profile-avatar">AS</div>
 
                 <div className="profile-hero-text">
-                    <h1>Andre Sarokhanian</h1>
+                    <h1>André Sarokhanian</h1>
                     <p className="profile-hero-subtitle">
-                        Software Developer · Graphic Designer · 20+ Years in the Industry
+                        Software Developer · Automation &amp; Design · 19+ Years Experience
                     </p>
                     <div className="profile-badges">
-                        <span className="profile-badge design">Adobe Suite</span>
-                        <span className="profile-badge dev">React · JS</span>
-                        <span className="profile-badge dev">Swift</span>
-                        <span className="profile-badge graphics">Graphics</span>
+                        <span className="profile-badge dev">JavaScript · JSX</span>
+                        <span className="profile-badge dev">Svelte · PixiJS</span>
+                        <span className="profile-badge graphics">Automation</span>
+                        <span className="profile-badge design">Design</span>
                     </div>
                 </div>
             </div>
@@ -32,10 +32,28 @@ const Profile = () => {
                         <span className="ci-icon">✉</span>
                         andres1983@icloud.com
                     </a>
-                    <span className="profile-contact-item">
+                    <a className="profile-contact-item" href="tel:424-421-4343">
                         <span className="ci-icon">📞</span>
                         424-421-4343
-                    </span>
+                    </a>
+                    <a
+                        className="profile-contact-item"
+                        href="https://andres1138.github.io"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <span className="ci-icon">🌐</span>
+                        andres1138.github.io
+                    </a>
+                    <a
+                        className="profile-contact-item"
+                        href="https://github.com/andres1138"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <span className="ci-icon">💻</span>
+                        github.com/andres1138
+                    </a>
                 </div>
 
                 {/* About */}
@@ -46,14 +64,10 @@ const Profile = () => {
                     </div>
                     <div className="profile-card-body profile-about">
                         <p>
-                            Over 20 years in the industry, starting in <span className="highlight">graphic design</span> — Adobe Illustrator and Photoshop from the ground up, back when you actually had to know what you were doing.
-                            Eventually that wasn't enough, so I learned to build the software too.
+                            Software developer with 7 years of production automation experience and a graphic design background. Built and deployed <span className="highlight">JavaScript/JSX automation tools for Adobe Illustrator</span> that replaced manual, per-item artist workflows with instant batch generation systems across high-volume sports-apparel production.
                         </p>
                         <p>
-                            These days I split my time between <span className="highlight">design and development</span> — JavaScript, React, Swift, HTML/CSS, C/C++. I don't follow trends; I pick up whatever the problem calls for and figure it out.
-                        </p>
-                        <p>
-                            This site is a side project — a <span className="highlight">Windows 95 desktop</span> built with modern web tech, mostly because I thought it would be fun and I still had something to prove to myself.
+                            Actively developing with <span className="highlight">Svelte, PixiJS, and Node.js</span>. Strong foundation in <span className="highlight">JavaScript, HTML/CSS, Git</span>, and component-based architecture. 19+ years solving complex problems under tight deadlines.
                         </p>
                     </div>
                 </div>
@@ -67,21 +81,22 @@ const Profile = () => {
                     <div className="profile-card-body">
                         <div className="skill-columns">
                             <div className="skill-group">
-                                <h3>Design</h3>
+                                <h3>Design &amp; Automation</h3>
                                 <ul className="tool-list">
-                                    <li>Adobe Illustrator</li>
-                                    <li>Adobe Photoshop</li>
-                                    <li>UI &amp; Visual Design</li>
-                                    <li>Print &amp; Digital Graphics</li>
+                                    <li>Adobe Illustrator &amp; Scripting</li>
+                                    <li>Adobe Photoshop &amp; InDesign</li>
+                                    <li>Workflow Automation</li>
+                                    <li>Process Optimization</li>
                                 </ul>
                             </div>
                             <div className="skill-group">
                                 <h3>Development</h3>
                                 <ul className="tool-list">
-                                    <li>JavaScript &amp; React</li>
-                                    <li>HTML &amp; CSS</li>
-                                    <li>Swift</li>
-                                    <li>C / C++</li>
+                                    <li>JavaScript &amp; JSX</li>
+                                    <li>Svelte &amp; PixiJS</li>
+                                    <li>HTML &amp; CSS / SASS</li>
+                                    <li>Node.js, Git &amp; GitHub</li>
+                                    <li>Swift &amp; Objective-C</li>
                                 </ul>
                             </div>
                         </div>
@@ -98,11 +113,12 @@ const Profile = () => {
                     <div className="profile-card-body">
                         <div className="exploring-tags">
                             {[
-                                "Computer Graphics",
-                                "Simulation",
-                                "Game Development",
-                                "Systems Programming",
-                                "Low-level Programming",
+                                "Svelte",
+                                "PixiJS",
+                                "Interactive Web Applications",
+                                "Workflow Automation",
+                                "Adobe Illustrator Scripting",
+                                "Node.js",
                             ].map((tag) => (
                                 <span className="exploring-tag" key={tag}>
                                     <span className="tag-dot" />

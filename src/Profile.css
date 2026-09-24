@@ -1,22 +1,29 @@
 /* =========================================================
-   PROFILE — Modern Retro Design
+   PROFILE — Modern Inside, Classic Windows 95 Frame Outside
    ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+/* Explicitly override 98.css pixelated font and aliased rendering inside the profile window */
+.profile,
+.profile * {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    text-rendering: optimizeLegibility;
+    box-sizing: border-box;
+}
 
 .profile {
-    font-family: 'Inter', 'Franklin Gothic Medium', Arial, sans-serif;
     background: linear-gradient(160deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
     color: #e8eaf6;
     display: flex;
     flex-direction: column;
     gap: 0;
-    box-sizing: border-box;
     min-height: 100%;
     position: relative;
     overflow: hidden;
 }
-
 
 /* Subtle grid overlay */
 .profile::before {
@@ -56,6 +63,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Outfit', 'Inter', sans-serif;
     font-size: 25px;
     font-weight: 700;
     color: #fff;
@@ -87,7 +95,8 @@
 }
 
 .profile-hero-text h1 {
-    font-size: 21px;
+    font-family: 'Outfit', 'Inter', sans-serif;
+    font-size: 22px;
     font-weight: 700;
     margin: 0 0 4px 0;
     background: linear-gradient(90deg, #fff 0%, #63b3ed 60%, #818cf8 100%);
@@ -231,7 +240,8 @@
 }
 
 .profile-card-header h2 {
-    font-size: 10.5px;
+    font-family: 'Outfit', 'Inter', sans-serif;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 1.2px;
     text-transform: uppercase;
@@ -275,11 +285,12 @@
 }
 
 .skill-group h3 {
-    font-size: 10px;
+    font-family: 'Outfit', 'Inter', sans-serif;
+    font-size: 10.5px;
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: rgba(232, 234, 246, 0.35);
+    color: rgba(232, 234, 246, 0.55);
     margin: 0 0 8px 0;
 }
 
@@ -294,15 +305,15 @@
 
 .tool-list li {
     font-size: 12px;
-    color: rgba(232, 234, 246, 0.8);
+    color: rgba(232, 234, 246, 0.85);
     padding: 4px 0 4px 12px;
     border-left: 2px solid rgba(99, 179, 237, 0.35);
-    line-height: 1.3;
+    line-height: 1.35;
 }
 
 .skills-note {
     font-size: 10.5px;
-    color: rgba(232, 234, 246, 0.3);
+    color: rgba(232, 234, 246, 0.4);
     font-style: italic;
     margin: 0;
     padding-top: 2px;
