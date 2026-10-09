@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>André Sarokhanian — Resume</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --sidebar-bg: #0f172a;
+            --sidebar-text: #cbd5e1;
+            --sidebar-head: #ffffff;
+            --accent: #3b82f6;
+            --accent-glow: #60a5fa;
+            --accent-soft: rgba(59, 130, 246, 0.08);
+            --text: #1e293b;
+            --text-secondary: #475569;
+            --heading: #0f172a;
+            --rule: #e2e8f0;
+            --tag-bg: rgba(255, 255, 255, 0.08);
+            --tag-border: rgba(255, 255, 255, 0.15);
+            --main-bg: #ffffff;
+        }
+
+        @page {
+            margin: 0;
+            size: letter;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 9.5pt;
+            color: var(--text);
+            background: #f1f5f9;
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .resume {
+            display: grid;
+            grid-template-columns: 230px 1fr;
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--main-bg);
+            min-height: 100vh;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        /* ═══════════════════════════════════════════════
+       SIDEBAR
+       ═══════════════════════════════════════════════ */
+        .sidebar {
+            background: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            padding: 36px 22px 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .sidebar-section h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 7pt;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-glow);
+            margin-bottom: 12px;
+            position: relative;
+            padding-bottom: 7px;
+        }
+
+        .sidebar-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 22px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* Profile */
+        .profile {
+            text-align: left;
+            margin-bottom: 4px;
+        }
+
+        .profile .name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 19pt;
+            font-weight: 800;
+            color: var(--sidebar-head);
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
+
+        .profile .tagline {
+            font-size: 7.5pt;
+            font-weight: 500;
+            color: var(--accent-glow);
+            margin-top: 6px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .profile-divider {
+            width: 36px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-glow));
+            border-radius: 3px;
+            margin: 12px 0 0;
+        }
+
+        /* Contact */
+        .contact-list {
+            list-style: none;
+        }
+
+        .contact-list li {
+            font-size: 8pt;
+            margin-bottom: 9px;
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            line-height: 1.4;
+        }
+
+        .contact-list .icon {
+            width: 15px;
+            height: 15px;
+            flex-shrink: 0;
+            margin-top: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-list .icon svg {
+            width: 12px;
+            height: 12px;
+            fill: var(--accent-glow);
+        }
+
+        .contact-list a {
+            color: var(--sidebar-text);
+            text-decoration: none;
+        }
+
+        /* Skill tags */
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .skill-tag {
+            font-size: 7pt;
+            font-weight: 500;
+            padding: 3px 8px;
+            border-radius: 3px;
+            background: var(--tag-bg);
+            border: 1px solid var(--tag-border);
+            color: var(--sidebar-text);
+            white-space: nowrap;
+        }
+
+        /* Education */
+        .edu-item {
+            margin-bottom: 12px;
+        }
+
+        .edu-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .edu-item .degree {
+            font-size: 8.5pt;
+            font-weight: 600;
+            color: var(--sidebar-head);
+            line-height: 1.3;
+        }
+
+        .edu-item .school {
+            font-size: 7.5pt;
+            color: var(--sidebar-text);
+            margin-top: 2px;
+        }
+
+        /* ═══════════════════════════════════════════════
+       MAIN CONTENT
+       ═══════════════════════════════════════════════ */
+        .main {
+            padding: 36px 34px 28px;
+        }
+
+        .main section {
+            margin-bottom: 22px;
+        }
+
+        .main section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 8.5pt;
+            font-weight: 700;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            color: var(--accent);
+            padding-bottom: 7px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid var(--rule);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 45px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        /* Experience entry */
+        .entry {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .entry:last-child {
+            margin-bottom: 0;
+        }
+
+        .entry-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 1px;
+        }
+
+        .entry-company {
+            font-family: 'Outfit', sans-serif;
+            font-size: 11pt;
+            font-weight: 700;
+            color: var(--heading);
+            letter-spacing: -0.2px;
+        }
+
+        .entry-date {
+            font-size: 7.5pt;
+            font-weight: 600;
+            color: var(--accent);
+            white-space: nowrap;
+            flex-shrink: 0;
+            background: var(--accent-soft);
+            padding: 2px 9px;
+            border-radius: 3px;
+            letter-spacing: 0.3px;
+        }
+
+        .entry-role {
+            font-size: 8.5pt;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .entry-role .location {
+            font-weight: 400;
+        }
+
+        .entry ul {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .entry ul li {
+            position: relative;
+            padding-left: 13px;
+            margin-bottom: 4px;
+            font-size: 8.5pt;
+            color: var(--text);
+            line-height: 1.55;
+        }
+
+        .entry ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .tech-callout {
+            margin-top: 8px;
+            font-size: 7.5pt;
+            color: var(--text-secondary);
+            background: linear-gradient(135deg, var(--accent-soft), rgba(59, 130, 246, 0.03));
+            border-left: 3px solid var(--accent);
+            padding: 5px 11px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .tech-callout strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .entry-divider {
+            border: none;
+            border-top: 1px solid var(--rule);
+            margin: 18px 0;
+        }
+
+        /* Summary */
+        .summary-text {
+            font-size: 9pt;
+            line-height: 1.65;
+            color: var(--text);
+        }
+
+        .summary-text p {
+            margin-bottom: 7px;
+        }
+
+        .summary-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ═══════════════════════════════════════════════
+       PRINT
+       ═══════════════════════════════════════════════ */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .resume {
+                box-shadow: none;
+                max-width: 100%;
+                min-height: auto;
+            }
+
+            .sidebar,
+            .skill-tag,
+            .entry-date,
+            .tech-callout,
+            .profile-divider,
+            .section-title::after,
+            .entry ul li::before {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            a {
+                color: inherit !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="resume">
+
+        <!-- ═══ SIDEBAR ═══ -->
+        <aside class="sidebar">
+
+            <div class="profile">
+                <div class="name">André<br />Sarokhanian</div>
+                <div class="tagline">Software Developer</div>
+                <div class="profile-divider"></div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Contact</h3>
+                <ul class="contact-list">
+                    <li>
+                        <span class="icon"><svg viewBox="0 0 24 24">
+                                <path
+                                    d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1.003 1.003 0 011.01-.24c1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.01l-2.2 2.21z" />
+                            </svg></span>
+                        424-421-4343
+                    </li>
+                    <li>
+                        <span class="icon"><svg viewBox="0 0 24 24">
+                                <path
+                                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                            </svg></span>
+                        andres1983@icloud.com
+                    </li>
+                    <li>
+                        <span class="icon"><svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                            </svg></span>
+                        <a href="https://andres1138.github.io">andres1138.github.io</a>
+                    </li>
+                    <li>
+                        <span class="icon"><svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z" />
+                            </svg></span>
+                        <a href="https://github.com/andres1138">github.com/andres1138</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Languages</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">JSX</span>
+                    <span class="skill-tag">HTML</span>
+                    <span class="skill-tag">CSS / SASS</span>
+                    <span class="skill-tag">Swift</span>
+                    <span class="skill-tag">Objective-C</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Frameworks & Tools</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Svelte</span>
+                    <span class="skill-tag">PixiJS</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">GitHub</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Automation</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Illustrator Scripting</span>
+                    <span class="skill-tag">Workflow Automation</span>
+                    <span class="skill-tag">Process Optimization</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Design</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Illustrator</span>
+                    <span class="skill-tag">Photoshop</span>
+                    <span class="skill-tag">InDesign</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Education</h3>
+                <div class="edu-item">
+                    <div class="degree">B.S. Graphic Design</div>
+                    <div class="school">Radford University — Radford, VA</div>
+                </div>
+                <div class="edu-item">
+                    <div class="degree">iOS Development Tech-Degree</div>
+                    <div class="school">Treehouse</div>
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- ═══ MAIN CONTENT ═══ -->
+        <main class="main">
+
+            <!-- SUMMARY -->
+            <section>
+                <div class="section-title">About</div>
+                <div class="summary-text">
+                    <p>Software developer with 7 years of production automation experience and a graphic design
+                        background. Built and deployed <strong>JavaScript/JSX automation tools for Adobe
+                            Illustrator</strong> that replaced manual, per-item artist workflows with instant batch
+                        generation systems across high-volume sports-apparel production.</p>
+                    <p>Actively developing with <strong>Svelte, PixiJS, and Node.js</strong>. Strong foundation in
+                        <strong>JavaScript, HTML/CSS, Git,</strong> and component-based architecture. 19+ years solving
+                        complex problems under tight deadlines.
+                    </p>
+                </div>
+            </section>
+
+            <!-- EXPERIENCE -->
+            <section>
+                <div class="section-title">Experience</div>
+
+                <div class="entry">
+                    <div class="entry-top">
+                        <span class="entry-company">BSN Sports</span>
+                        <span class="entry-date">2019 – 2026</span>
+                    </div>
+                    <div class="entry-role">Production Artist / Automation Developer</div>
+                    <ul>
+                        <li>Developed <strong>JavaScript/JSX automation tools</strong> for Adobe Illustrator,
+                            eliminating significant volumes of repetitive manual production work.</li>
+                        <li>Built batch automation for custom jersey names and numbers — replaced a fully manual
+                            per-item workflow with near-instant generation.</li>
+                        <li>Translated production requirements into scripted, automated workflows deployed across
+                            multiple apparel-printing pipelines.</li>
+                        <li>Diagnosed inefficient processes and engineered practical solutions that dramatically reduced
+                            manual overhead.</li>
+                        <li>Collaborated with production staff to identify pain points, test solutions, and iterate on
+                            automated workflows.</li>
+                        <li>Performed quality-control checks and troubleshooting across complex multi-step production
+                            pipelines.</li>
+                    </ul>
+                    <div class="tech-callout"><strong>Stack:</strong> JavaScript · JSX · Adobe Illustrator Scripting ·
+                        Workflow Automation</div>
+                </div>
+
+                <hr class="entry-divider" />
+
+                <div class="entry">
+                    <div class="entry-top">
+                        <span class="entry-company">Digital Solutions LLC</span>
+                        <span class="entry-date">2018 – 2019</span>
+                    </div>
+                    <div class="entry-role">Graphic & Web Designer · <span class="location">Washington, DC</span></div>
+                    <ul>
+                        <li>Designed and developed custom static websites for small-business clients from scratch — no
+                            generic templates.</li>
+                        <li>Collaborated directly with clients to translate business requirements into functional
+                            websites and visual assets.</li>
+                        <li>Built practical understanding of responsive design, web structure, and the gap between
+                            design and implementation.</li>
+                    </ul>
+                </div>
+
+                <hr class="entry-divider" />
+
+                <div class="entry">
+                    <div class="entry-top">
+                        <span class="entry-company">Fan Cloth</span>
+                        <span class="entry-date">2016 – 2018</span>
+                    </div>
+                    <div class="entry-role">Film Separation Artist · <span class="location">Arlington, TX</span></div>
+                    <ul>
+                        <li>Prepared high volumes of customer artwork for screen-printing and sublimation production.
+                        </li>
+                        <li>Processed 18–22 customer orders daily while maintaining accuracy and production deadlines.
+                        </li>
+                        <li>Translated complex visual requirements into technically precise production files.</li>
+                    </ul>
+                </div>
+
+                <hr class="entry-divider" />
+
+                <div class="entry">
+                    <div class="entry-top">
+                        <span class="entry-company">Mendocino Farms</span>
+                        <span class="entry-date">2011 – 2016</span>
+                    </div>
+                    <div class="entry-role">Graphic Designer · <span class="location">Los Angeles, CA</span></div>
+                    <ul>
+                        <li>Created branding, advertising, menus, signage, and marketing materials for multiple
+                            restaurant locations.</li>
+                        <li>Worked directly with company founders to turn business requirements into finished creative
+                            deliverables.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- PROJECTS -->
+            <section>
+                <div class="section-title">Projects</div>
+                <div class="entry">
+                    <div class="entry-top">
+                        <span class="entry-company">Independent Development</span>
+                        <span class="entry-date">Ongoing</span>
+                    </div>
+                    <ul>
+                        <li>Building interactive web applications with <strong>Svelte</strong> and
+                            <strong>PixiJS</strong> — component architecture, state management, and event-driven design.
+                        </li>
+                        <li>Applying Git/GitHub workflows across all projects for version control and organized
+                            development.</li>
+                        <li>Studying asynchronous programming, application architecture, and real-world codebase
+                            patterns through active development.</li>
+                    </ul>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</body>
+
+</html>

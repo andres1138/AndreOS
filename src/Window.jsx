@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useLayoutEffect } from "react";
 import '98.css';
 
 
@@ -27,6 +27,7 @@ const Window = ({
     maxWidth = Infinity,
     minHeight = 150,
     maxHeight = Infinity,
+    autoFit = true, // size the window to its content on open (falls back to defaults)
 }) => {
 
     const [width, setWidth] = useState(defaultWidth);
@@ -35,6 +36,25 @@ const Window = ({
     const [isMaximized, setIsMaximized] = useState(false);
     const [position, setPosition] = useState({ x: 100, y: 100 });
     const windowRef = useRef(null);
+
+    // On first mount, let the window shrink-wrap its content, measure it, then lock that size in.
+    useLayoutEffect(() => {
+        const el = windowRef.current;
+        if (!autoFit || !el) return;
+        const prevW = el.style.width;
+        const prevH = el.style.height;
+        el.style.width = 'max-content';
+        el.style.height = 'auto';
+        const w = Math.ceil(el.offsetWidth);
+        const h = Math.ceil(el.offsetHeight);
+        el.style.width = prevW;
+        el.style.height = prevH;
+        if (w > 0 && h > 0) {
+            setWidth(Math.min(maxWidth, Math.max(minWidth, w)));
+            setHeight(Math.min(maxHeight, Math.max(minHeight, h)));
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const onMouseDown = (e) => {
         // Don't drag if the click was on a control button

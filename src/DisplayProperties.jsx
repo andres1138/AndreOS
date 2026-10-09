@@ -53,15 +53,8 @@ const DisplayProperties = ({ currentBackground, onApply, onClose }) => {
         <div className="display-properties">
             <div className="field-row-stacked" style={{ marginBottom: '10px' }}>
                 <label htmlFor="wallpaper-select">Wallpaper:</label>
-                <select id="wallpaper-select" disabled>
-                    <option>(None)</option>
-                </select>
-            </div>
-
-            <div className="field-row-stacked" style={{ marginBottom: '10px' }}>
-                <label htmlFor="pattern-select">Pattern:</label>
                 <select
-                    id="pattern-select"
+                    id="wallpaper-select"
                     value={selectedPattern}
                     onChange={handlePatternChange}
                 >

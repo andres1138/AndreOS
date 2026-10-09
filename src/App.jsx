@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Window from "./Window.jsx";
 import Content1 from "./Content1.jsx";
 import Contact from './Contact.jsx';
-import Profile from './Profile.jsx';
+import Portfolio from './Portfolio.jsx';
 import Plinko from './Plinko.jsx';
 import Clock from './Clock.jsx';
 import ClockIcon from './ClockIcon.jsx';
@@ -64,14 +64,15 @@ function App() {
     },
     {
       id: 3,
-      title: "My Profile",
+      title: "Portfolio",
       icon: profile_Icon,
-      content: <Profile />,
+      content: <Portfolio />,
       resizable: true,
-      defaultWidth: 520,
-      defaultHeight: 400,
-      minWidth: 350,
+      defaultWidth: 840,
+      defaultHeight: 600,
+      minWidth: 400,
       minHeight: 300,
+      maxHeight: window.innerHeight - 140,
     },
     {
       id: 4,
@@ -90,10 +91,11 @@ function App() {
       icon: contact_icon,
       content: <Contact />,
       resizable: true,
-      defaultWidth: 850,
-      defaultHeight: 600,
-      minWidth: 700,
-      minHeight: 500,
+      defaultWidth: 760,
+      defaultHeight: 560,
+      minWidth: 400,
+      minHeight: 300,
+      maxHeight: window.innerHeight - 140,
     },
     {
       id: 6,

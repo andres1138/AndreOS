@@ -1,0 +1,268 @@
+/* =========================================================
+   PORTFOLIO — resume inside a Windows 95 frame.
+   Everything is scoped under .portfolio so 98.css globals don't leak in.
+   ========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+.portfolio {
+    --pf-sidebar-bg: #1f2937;
+    --pf-sidebar-text: #d1d5db;
+    --pf-accent: #d97757;
+    --pf-accent-glow: #f0a58a;
+    --pf-accent-soft: rgba(217, 119, 87, 0.10);
+    --pf-text: #1f2937;
+    --pf-text-secondary: #4b5563;
+    --pf-heading: #111827;
+    --pf-rule: #e5e7eb;
+
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    width: 800px;
+    max-width: 100%;
+    background: #ffffff;
+    color: var(--pf-text);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.portfolio,
+.portfolio * {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
+}
+
+.portfolio h1,
+.portfolio h2,
+.portfolio h3,
+.portfolio p,
+.portfolio ul {
+    margin: 0;
+    padding: 0;
+}
+
+.portfolio ul {
+    list-style: none;
+}
+
+/* ── Sidebar ── */
+.pf-sidebar {
+    background: var(--pf-sidebar-bg);
+    color: var(--pf-sidebar-text);
+    padding: 28px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.portfolio .pf-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 25px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+}
+
+.pf-tagline {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--pf-accent-glow);
+    margin-top: 6px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+
+.pf-divider {
+    width: 36px;
+    height: 3px;
+    margin-top: 12px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--pf-accent), var(--pf-accent-glow));
+}
+
+.portfolio .pf-side-section h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--pf-accent-glow);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    position: relative;
+}
+
+.portfolio .pf-side-section h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--pf-accent);
+}
+
+.pf-contact li {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 11px;
+    margin-bottom: 8px;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.pf-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.pf-icon svg {
+    width: 12px;
+    height: 12px;
+    fill: var(--pf-accent-glow);
+}
+
+.portfolio .pf-contact a {
+    color: var(--pf-sidebar-text);
+    text-decoration: none;
+}
+
+.portfolio .pf-contact a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.pf-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.pf-tag {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    white-space: nowrap;
+}
+
+.pf-edu + .pf-edu {
+    margin-top: 10px;
+}
+
+.pf-degree {
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.3;
+}
+
+.pf-school {
+    font-size: 10.5px;
+    margin-top: 2px;
+}
+
+/* ── Main ── */
+.pf-main {
+    padding: 28px 30px;
+}
+
+.pf-main section + section {
+    margin-top: 22px;
+}
+
+.portfolio .pf-section-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--pf-accent);
+    padding-bottom: 7px;
+    margin-bottom: 14px;
+    border-bottom: 2px solid var(--pf-rule);
+    position: relative;
+}
+
+.portfolio .pf-section-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 45px;
+    height: 2px;
+    background: var(--pf-accent);
+}
+
+.pf-summary {
+    font-size: 12.5px;
+    line-height: 1.65;
+}
+
+.pf-entry + .pf-entry {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--pf-rule);
+}
+
+.pf-entry-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.pf-company {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--pf-heading);
+}
+
+.pf-date {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--pf-accent);
+    background: var(--pf-accent-soft);
+    padding: 2px 9px;
+    border-radius: 3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.pf-role {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--pf-text-secondary);
+    margin: 1px 0 7px;
+}
+
+.pf-location {
+    font-weight: 400;
+}
+
+.pf-bullets li {
+    position: relative;
+    padding-left: 13px;
+    margin-bottom: 4px;
+    font-size: 12px;
+}
+
+.pf-bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--pf-accent);
+}
