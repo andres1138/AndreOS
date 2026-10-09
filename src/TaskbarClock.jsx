@@ -6,28 +6,33 @@ const TaskbarClock = () => {
     useEffect(() => {
         const timer = setInterval(() => {
             setTime(new Date());
-            // Update every second
-        }, 1000)
-
+        }, 1000);
         return () => clearInterval(timer);
     }, []);
 
     const formatTime = (date) => {
         let hours = date.getHours();
         const minutes = date.getMinutes().toString().padStart(2, '0');
+        const seconds = date.getSeconds().toString().padStart(2, '0');
         const ampm = hours >= 12 ? 'PM' : 'AM';
-
-        hours = hours % 12;
-        hours = hours ? hours : 12; // 0 should be 12
-
-        return `${hours}:${minutes} ${ampm}`;
+        hours = hours % 12 || 12;
+        return { time: `${hours}:${minutes}:${seconds}`, ampm };
     };
+
+    const formatDate = (date) => {
+        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    };
+
+    const { time: timeStr, ampm } = formatTime(time);
 
     return (
         <div className="taskbar-clock">
-            {formatTime(time)}
+            <span className="taskbar-clock__time">{timeStr}</span>
+            <span className="taskbar-clock__ampm">{ampm}</span>
+            <span className="taskbar-clock__date">{formatDate(time)}</span>
         </div>
     );
 };
 
 export default TaskbarClock;
+

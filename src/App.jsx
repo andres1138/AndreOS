@@ -4,9 +4,14 @@ import Content1 from "./Content1.jsx";
 import Contact from './Contact.jsx';
 import Profile from './Profile.jsx';
 import Plinko from './Plinko.jsx';
+import Clock from './Clock.jsx';
+import ClockIcon from './ClockIcon.jsx';
+import Calculator from './Calculator.jsx';
+import CalculatorIcon from './CalculatorIcon.jsx';
 import DisplayProperties from "./DisplayProperties.jsx";
 import DesktopIcon from "./DesktopIcon.jsx";
 import TaskbarClock from "./TaskbarClock.jsx";
+import StartMenu from "./StartMenu.jsx";
 import './App.css'
 
 import profileIcon from "./icons/UselessButtonsIcon.png";
@@ -53,7 +58,6 @@ function App() {
           onClose={() => handleClose(2)}
         />
       ),
-
       resizable: false,
       defaultWidth: 380,
       defaultHeight: 420,
@@ -80,7 +84,6 @@ function App() {
       minWidth: 700,
       minHeight: 500,
     },
-
     {
       id: 5,
       title: "Contact",
@@ -91,6 +94,30 @@ function App() {
       defaultHeight: 600,
       minWidth: 700,
       minHeight: 500,
+    },
+    {
+      id: 6,
+      title: "Clock",
+      icon: null,
+      iconComponent: <ClockIcon size={32} />,
+      content: <Clock />,
+      resizable: true,
+      defaultWidth: 380,
+      defaultHeight: 420,
+      minWidth: 320,
+      minHeight: 360,
+    },
+    {
+      id: 7,
+      title: "Calculator",
+      icon: null,
+      iconComponent: <CalculatorIcon size={32} />,
+      content: <Calculator />,
+      resizable: true,
+      defaultWidth: 300,
+      defaultHeight: 420,
+      minWidth: 240,
+      minHeight: 340,
     },
   ];
 
@@ -124,11 +151,10 @@ function App() {
           id={win.id}
           title={win.title}
           icon={win.icon}
+          iconComponent={win.iconComponent}
           isSelected={selectedIconId === win.id}
           onSelect={(id) => setSelectedIconId(id)}
-          // 100px apart horizontally
           initialX={20 + idx * 100}
-          // same top row
           initialY={20}
           onDoubleClick={() => {
             setSelectedIconId(win.id);
@@ -137,13 +163,12 @@ function App() {
         />
       ))}
 
-
-
       {openWindows.map((window) => (
         <Window
           key={window.id}
           title={window.title}
           icon={window.icon}
+          iconComponent={window.iconComponent}
           topWindow={topWindow}
           setTopWindow={setTopWindow}
           onClose={() => handleClose(window.id)}
@@ -161,13 +186,13 @@ function App() {
         </Window>
       ))}
 
-
       {/* Taskbar */}
       <div className="taskbar">
+        <StartMenu availableWindows={availableWindows} onOpen={handleOpenWindow} />
+        <div className="taskbar-divider" />
         {minimized.map((id) => {
           const win = availableWindows.find((w) => w.id === id);
           if (!win) return null;
-
 
           return (
             <div
@@ -186,11 +211,10 @@ function App() {
                 boxSizing: "border-box",
               }}
             >
-              <img
-                src={win.icon}
-                alt={win.title}
-                style={{ width: 20, height: 20, marginRight: 4 }}
-              />
+              {win.iconComponent
+                ? <div style={{ width: 20, height: 20, marginRight: 4, display: "flex", alignItems: "center" }}>{win.iconComponent}</div>
+                : <img src={win.icon} alt={win.title} style={{ width: 20, height: 20, marginRight: 4 }} />
+              }
               <span style={{ fontSize: "12px" }}>{win.title}</span>
             </div>
           );

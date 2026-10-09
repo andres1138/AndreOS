@@ -48,6 +48,15 @@
     border-bottom: 2px solid #808080;
 }
 
+.taskbar-divider {
+    width: 1px;
+    height: 20px;
+    background: #808080;
+    border-right: 1px solid #fff;
+    margin: 0 4px;
+    flex-shrink: 0;
+}
+
 .resize-handle {
     position: absolute;
     width: 10px;
@@ -197,16 +206,39 @@
     min-width: 75px;
 }
 
-/* Taskbar Clock */
+/* Taskbar Clock - Windows 95 style */
 .taskbar-clock {
     margin-left: auto;
-    padding: 4px 8px;
-    border: 2px inset #fff;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    height: 22px;
+    box-sizing: border-box;
     background: #c0c0c0;
+    border-top: 1px solid #808080;
+    border-left: 1px solid #808080;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
     font-family: 'MS Sans Serif', Arial, sans-serif;
-    font-size: 11px;
-    line-height: 1;
     user-select: none;
+    cursor: default;
+}
+
+.taskbar-clock__time {
+    font-size: 11px;
+    color: #000;
+}
+
+.taskbar-clock__ampm {
+    font-size: 11px;
+    color: #000;
+}
+
+.taskbar-clock__date {
+    font-size: 11px;
+    color: #000;
+    margin-left: 4px;
 }
 
 /* Desktop Icons Styling */

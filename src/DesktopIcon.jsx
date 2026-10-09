@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const DesktopIcon = ({ id, title, icon, isSelected, onSelect, onDoubleClick, initialX, initialY }) => {
+const DesktopIcon = ({ id, title, icon, iconComponent, isSelected, onSelect, onDoubleClick, initialX, initialY }) => {
     const [position, setPosition] = useState({ x: initialX, y: initialY });
     const [dragging, setDragging] = useState(false);
     const [isPressed, setIsPressed] = useState(false);
@@ -73,7 +73,10 @@ const DesktopIcon = ({ id, title, icon, isSelected, onSelect, onDoubleClick, ini
             }}
         >
             <div className="icon-wrapper">
-                <img src={icon} alt={title} className="icon-image" draggable={false} />
+                {iconComponent
+                    ? <div className="icon-image" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>{iconComponent}</div>
+                    : <img src={icon} alt={title} className="icon-image" draggable={false} />
+                }
             </div>
             <div className="icon-title">{title}</div>
         </div>
