@@ -21,10 +21,8 @@
     position: absolute;
     inset: -4px;
     border-radius: 50%;
-    background: conic-gradient(
-        from 0deg,
-        #3a3a6a, #5555a0, #3a3a6a, #5555a0, #3a3a6a
-    );
+    background: conic-gradient(from 0deg,
+            #3a3a6a, #5555a0, #3a3a6a, #5555a0, #3a3a6a);
     z-index: -1;
     opacity: 0.6;
 }
