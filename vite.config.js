@@ -8,4 +8,6 @@ export default defineConfig({
   build: {
     cssMinify: false,
   },
+
+  base: '/AndreOS/',
 })
