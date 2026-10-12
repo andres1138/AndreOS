@@ -77,14 +77,19 @@ const Window = ({
     useLayoutEffect(() => {
         const el = windowRef.current;
         if (!autoFit || !el) return;
+        const body = el.querySelector('.window-body');
         const prevW = el.style.width;
         const prevH = el.style.height;
+        // .window-body is a size container (for responsive app content); containers report
+        // no intrinsic width, so turn containment off while measuring the natural size.
+        if (body) body.style.containerType = 'normal';
         el.style.width = 'max-content';
         el.style.height = 'auto';
         const w = Math.ceil(el.offsetWidth);
         const h = Math.ceil(el.offsetHeight);
         el.style.width = prevW;
         el.style.height = prevH;
+        if (body) body.style.containerType = '';
         if (w > 0 && h > 0) {
             const size = clampSize(w, h);
             setWidth(size.w);

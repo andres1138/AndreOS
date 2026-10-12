@@ -137,3 +137,16 @@
     box-shadow: 0 0 6px rgba(255, 80, 80, 0.8);
     z-index: 11;
 }
+/* ── Responsive: shrink the whole clock in narrow windows ──
+   zoom scales every px-based detail (ticks, hands, numerals) proportionally. */
+@container win (max-width: 540px) {
+    .clock { zoom: 0.8; }
+}
+
+@container win (max-width: 440px) {
+    .clock { zoom: 0.66; }
+}
+
+@container win (max-width: 360px) {
+    .clock { zoom: 0.55; }
+}

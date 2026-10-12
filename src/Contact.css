@@ -360,3 +360,41 @@
 .ct-success strong {
     color: var(--ct-heading);
 }
+
+/* ── Responsive: narrow windows (phones, or a window resized small) ──
+   Sidebar stacks above the form; two-column fields become one. */
+@container win (max-width: 600px) {
+    .contact {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    .ct-sidebar {
+        padding: 22px 18px;
+        gap: 18px;
+    }
+
+    .contact .ct-name br {
+        display: none;
+    }
+
+    .ct-main {
+        padding: 22px 18px;
+    }
+
+    .ct-row-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .ct-footer {
+        flex-direction: column-reverse;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    /* 16px inputs stop iOS Safari from zooming in on focus */
+    .contact .ct-field input,
+    .contact .ct-field textarea {
+        font-size: 16px;
+    }
+}

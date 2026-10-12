@@ -487,3 +487,62 @@
     from { opacity: 0; transform: scale(0.5); }
     to { opacity: 1; transform: scale(1); }
 }
+/* ── Responsive: narrow windows (phones, or a window resized small) ──
+   Board on top, controls underneath, and the whole app scrolls vertically.
+   The physics canvas keeps its internal 750×560 size and is scaled down with CSS. */
+@container win (max-width: 640px) {
+    .plinko-app {
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .plinko-app .game-area {
+        order: -1;
+        flex: none;
+        overflow: visible;
+    }
+
+    .plinko-app .canvas-container {
+        flex: none;
+    }
+
+    /* matter.js writes inline px sizes on the canvas, hence !important */
+    .plinko-app .canvas-container canvas {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .plinko-app .multiplier-row {
+        position: static;
+        gap: 2px;
+        padding: 4px 6px 10px;
+    }
+
+    .plinko-app .multiplier-slot {
+        flex: 1 1 0;
+        min-width: 0;
+        padding: 4px 0;
+        font-size: 8px;
+        letter-spacing: -0.3px;
+        overflow: hidden;
+    }
+
+    .plinko-app .sidebar {
+        width: 100%;
+        min-width: 0;
+        overflow: visible;
+        border-right: none;
+        border-top: 1px solid var(--border);
+    }
+
+    .plinko-app .stats-section {
+        margin-top: 0;
+    }
+
+    /* 16px inputs stop iOS Safari from zooming in on focus */
+    .plinko-app .control-input,
+    .plinko-app .rows-select {
+        font-size: 16px;
+    }
+}

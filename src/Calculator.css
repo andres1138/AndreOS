@@ -76,3 +76,11 @@
 .btn-operator { background: #1f4e79; color: #63b3ed !important; font-size: 22px !important; }
 .btn-operator.active { background: #63b3ed; color: #1a1a2e !important; }
 .btn-equals { background: #f97316; color: #1a1a2e !important; font-weight: bold; font-size: 22px !important; }
+
+/* ── Responsive: tighter spacing in narrow windows ── */
+@container win (max-width: 280px) {
+    .calculator { gap: 8px; padding: 8px; }
+    .calc-buttons { gap: 4px; }
+    .display { font-size: 28px; }
+    .display.small { font-size: 20px; }
+}

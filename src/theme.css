@@ -317,6 +317,9 @@ body {
     min-height: 0; /* lets the body scroll inside the flex column */
     overflow: auto;
     padding: 16px;
+    /* Apps inside a window respond to the WINDOW's width (not the screen's)
+       via @container win (...) rules in their own stylesheets. */
+    container: win / inline-size;
 }
 
 /* ── Resize handles ── */

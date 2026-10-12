@@ -189,6 +189,7 @@
     flex-direction: column;
     gap: 18px;
     width: 320px;
+    max-width: 100%;
     font-size: 13px;
 }
 

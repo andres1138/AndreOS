@@ -266,3 +266,30 @@
     border-radius: 50%;
     background: var(--pf-accent);
 }
+
+/* ── Responsive: narrow windows (phones, or a window resized small) ──
+   Sidebar stacks above the main column. */
+@container win (max-width: 600px) {
+    .portfolio {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    .pf-sidebar {
+        padding: 22px 18px;
+        gap: 18px;
+    }
+
+    .portfolio .pf-name br {
+        display: none; /* name on one line when there's full width */
+    }
+
+    .pf-main {
+        padding: 22px 18px;
+    }
+
+    .pf-entry-top {
+        flex-wrap: wrap;
+        gap: 4px 12px;
+    }
+}
