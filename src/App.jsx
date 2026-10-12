@@ -51,7 +51,7 @@ function App() {
     },
     {
       id: 3,
-      title: "Portfolio",
+      title: "Resume",
       icon: profile_Icon,
       content: <Portfolio />,
       resizable: true,

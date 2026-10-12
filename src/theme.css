@@ -28,7 +28,8 @@
     /* Colour accents */
     --grad-accent: linear-gradient(110deg, #e2566a 0%, #e8714f 45%, #f0a04b 100%);
     --grad-accent-vertical: linear-gradient(to top, #e2566a 0%, #e8714f 50%, #f0a04b 100%);
-    --ink: #1f1b2e;          /* deep plum used for the taskbar */
+    --ink: #1f1b2e;
+    /* deep plum used for the taskbar */
     --ink-raised: rgba(255, 255, 255, 0.08);
     --ink-hover: rgba(255, 255, 255, 0.16);
     --on-ink: #f5f3ff;
@@ -94,6 +95,7 @@ body {
 
 /* Bigger hit areas for fingers */
 @media (pointer: coarse) {
+
     .resize-handle.top-left,
     .resize-handle.top-right,
     .resize-handle.bottom-left,
@@ -103,10 +105,14 @@ body {
     }
 
     .resize-handle.left,
-    .resize-handle.right { width: 14px; }
+    .resize-handle.right {
+        width: 14px;
+    }
 
     .resize-handle.top,
-    .resize-handle.bottom { height: 14px; }
+    .resize-handle.bottom {
+        height: 14px;
+    }
 }
 
 body {
@@ -282,10 +288,21 @@ body {
     mask: var(--icon) center / contain no-repeat;
 }
 
-.title-bar-controls button[aria-label="Minimize"] { --icon: var(--icon-minimize); }
-.title-bar-controls button[aria-label="Maximize"] { --icon: var(--icon-maximize); }
-.window.maximized .title-bar-controls button[aria-label="Maximize"] { --icon: var(--icon-restore); }
-.title-bar-controls button[aria-label="Close"] { --icon: var(--icon-close); }
+.title-bar-controls button[aria-label="Minimize"] {
+    --icon: var(--icon-minimize);
+}
+
+.title-bar-controls button[aria-label="Maximize"] {
+    --icon: var(--icon-maximize);
+}
+
+.window.maximized .title-bar-controls button[aria-label="Maximize"] {
+    --icon: var(--icon-restore);
+}
+
+.title-bar-controls button[aria-label="Close"] {
+    --icon: var(--icon-close);
+}
 
 .title-bar-controls button:hover:not(:disabled) {
     color: var(--text);
@@ -314,7 +331,8 @@ body {
 
 .window-body {
     flex: 1;
-    min-height: 0; /* lets the body scroll inside the flex column */
+    min-height: 0;
+    /* lets the body scroll inside the flex column */
     overflow: auto;
     padding: 16px;
     /* Apps inside a window respond to the WINDOW's width (not the screen's)
@@ -331,10 +349,29 @@ body {
     z-index: 20;
 }
 
-.resize-handle.bottom-right { right: 0; bottom: 0; cursor: se-resize; }
-.resize-handle.bottom-left  { left: 0;  bottom: 0; cursor: sw-resize; }
-.resize-handle.top-right    { right: 0; top: 0;    cursor: ne-resize; }
-.resize-handle.top-left     { left: 0;  top: 0;    cursor: nw-resize; }
+.resize-handle.bottom-right {
+    right: 0;
+    bottom: 0;
+    cursor: se-resize;
+}
+
+.resize-handle.bottom-left {
+    left: 0;
+    bottom: 0;
+    cursor: sw-resize;
+}
+
+.resize-handle.top-right {
+    right: 0;
+    top: 0;
+    cursor: ne-resize;
+}
+
+.resize-handle.top-left {
+    left: 0;
+    top: 0;
+    cursor: nw-resize;
+}
 
 .resize-handle.top,
 .resize-handle.bottom {
@@ -344,8 +381,13 @@ body {
     cursor: ns-resize;
 }
 
-.resize-handle.top { top: 0; }
-.resize-handle.bottom { bottom: 0; }
+.resize-handle.top {
+    top: 0;
+}
+
+.resize-handle.bottom {
+    bottom: 0;
+}
 
 .resize-handle.left,
 .resize-handle.right {
@@ -355,8 +397,13 @@ body {
     cursor: ew-resize;
 }
 
-.resize-handle.left { left: 0; }
-.resize-handle.right { right: 0; }
+.resize-handle.left {
+    left: 0;
+}
+
+.resize-handle.right {
+    right: 0;
+}
 
 /* ── Scrollbars ── */
 * {
