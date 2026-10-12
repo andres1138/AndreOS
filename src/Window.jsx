@@ -1,5 +1,4 @@
 import React, { useState, useRef, useLayoutEffect } from "react";
-import '98.css';
 
 
 // Windows 95 window husk with the standard three buttons and optional resizing capabilities.
@@ -139,7 +138,7 @@ const Window = ({
     return (
         <div
             ref={windowRef}
-            className="window"
+            className={`window${topWindow === title ? ' active' : ''}${isMaximized ? ' maximized' : ''}`}
             style={{
                 zIndex: topWindow === title ? 10 : 1,
                 width: isMaximized ? '100%' : width,

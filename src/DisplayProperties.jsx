@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import '98.css';
+import pattern1 from "./bg_images/pattern1.svg";
+import pattern2 from "./bg_images/pattern2.svg";
 
 const DisplayProperties = ({ currentBackground, onApply, onClose }) => {
     const [selectedBg, setSelectedBg] = useState(currentBackground);
@@ -18,8 +19,8 @@ const DisplayProperties = ({ currentBackground, onApply, onClose }) => {
 
     const patternOptions = [
         { id: 'none', name: '(None)', value: null },
-        { id: 'pattern1', name: 'Pattern 1', value: 'url(/src/bg_images/pattern1.svg)' },
-        { id: 'pattern2', name: 'Pattern 2', value: 'url(/src/bg_images/pattern2.svg)' },
+        { id: 'pattern1', name: 'Pattern 1', value: `url(${pattern1})` },
+        { id: 'pattern2', name: 'Pattern 2', value: `url(${pattern2})` },
     ];
 
     const handlePatternChange = (e) => {
@@ -92,7 +93,7 @@ const DisplayProperties = ({ currentBackground, onApply, onClose }) => {
             </div>
 
             <div className="button-row">
-                <button onClick={handleOk}>OK</button>
+                <button className="primary" onClick={handleOk}>OK</button>
                 <button onClick={onClose}>Cancel</button>
                 <button onClick={handleApply}>Apply</button>
             </div>

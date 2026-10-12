@@ -5,7 +5,5 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: '/AndreOS/',
-  build: {
-    cssMinify: false,
-  },
+
 })

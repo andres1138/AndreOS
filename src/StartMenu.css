@@ -9,36 +9,36 @@
 .start-button {
     display: flex;
     align-items: center;
-    gap: 5px;
-    height: 22px;
-    padding: 0 8px;
-    font-family: 'MS Sans Serif', Arial, sans-serif;
-    font-size: 11px;
-    font-weight: bold;
-    color: #000;
-    background: #c0c0c0;
-    border-top: 2px solid #fff;
-    border-left: 2px solid #fff;
-    border-right: 2px solid #808080;
-    border-bottom: 2px solid #808080;
-    box-shadow: inset 1px 1px 0 #dfdfdf;
+    gap: 8px;
+    height: 34px;
+    min-width: 60px;
+    padding: 0 14px 0 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+    background: var(--grad-accent);
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 2px 10px rgba(232, 113, 79, 0.35);
     cursor: pointer;
     user-select: none;
-    outline: none;
-    min-width: 60px;
+    transition: filter 0.15s ease, box-shadow 0.15s ease;
 }
 
 .start-button:hover {
-    background: #d0d0d0;
+    background: var(--grad-accent);
+    filter: brightness(1.06);
+    box-shadow: 0 2px 14px rgba(232, 113, 79, 0.5);
 }
 
 .start-button.active {
-    border-top: 2px solid #808080;
-    border-left: 2px solid #808080;
-    border-right: 2px solid #fff;
-    border-bottom: 2px solid #fff;
-    box-shadow: inset 1px 1px 0 #a0a0a0;
-    background: #b8b8b8;
+    background: var(--grad-accent);
+    filter: brightness(0.92);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.start-button.active:hover {
+    background: var(--grad-accent);
 }
 
 .start-flag {
@@ -48,7 +48,7 @@
 }
 
 .start-label {
-    letter-spacing: 0.3px;
+    letter-spacing: 0.2px;
 }
 
 /* ── Start Menu Popup ── */
@@ -56,18 +56,16 @@
     position: absolute;
     bottom: 100%;
     left: 0;
-    margin-bottom: 2px;
+    margin-bottom: 8px;
     display: flex;
     flex-direction: row;
-    background: #c0c0c0;
-    border-top: 2px solid #fff;
-    border-left: 2px solid #fff;
-    border-right: 2px solid #808080;
-    border-bottom: 2px solid #808080;
-    box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
-    min-width: 220px;
+    min-width: 240px;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: 0;
+    box-shadow: var(--shadow-lg);
     z-index: 2000;
-    animation: menuSlideUp 0.1s ease-out;
+    animation: menuSlideUp 0.14s ease-out;
 }
 
 @keyframes menuSlideUp {
@@ -83,25 +81,22 @@
 
 /* ── Sidebar stripe ── */
 .start-menu-sidebar {
-    width: 26px;
-    background: linear-gradient(to top, #000080, #1084d0);
+    width: 28px;
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    padding-bottom: 6px;
+    padding-bottom: 10px;
     flex-shrink: 0;
+    background: var(--grad-accent-vertical);
 }
 
 .start-menu-sidebar-text {
-    font-family: 'MS Sans Serif', Arial, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffffff;
     writing-mode: vertical-rl;
     transform: rotate(180deg);
     letter-spacing: 2px;
-    opacity: 0.85;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
 }
 
 /* ── App list ── */
@@ -109,50 +104,55 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 4px 0;
+    padding: 6px;
 }
 
 .start-menu-section-label {
-    font-family: 'MS Sans Serif', Arial, sans-serif;
-    font-size: 10px;
-    font-weight: bold;
-    color: #808080;
-    padding: 4px 8px 2px 8px;
-    border-bottom: 1px solid #808080;
-    margin-bottom: 2px;
+    padding: 6px 10px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    color: var(--text-secondary);
 }
 
 .start-menu-item {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 4px 12px;
-    font-family: 'MS Sans Serif', Arial, sans-serif;
-    font-size: 12px;
-    color: #000;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100%;
+    padding: 7px 10px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    text-align: left;
     background: transparent;
     border: none;
+    border-left: 3px solid transparent;
+    border-radius: 0;
+    box-shadow: none;
     cursor: pointer;
-    text-align: left;
-    width: 100%;
-    outline: none;
-    transition: none;
 }
 
 .start-menu-item:hover {
-    background: #000080;
-    color: #fff;
+    color: var(--accent-dark);
+    background: var(--accent-soft);
+    border: none;
+    border-left: 3px solid #e8714f;
 }
 
-.start-menu-item:hover .start-menu-icon {
-    filter: brightness(1.2);
+.start-menu-item:active {
+    transform: none;
 }
 
 .start-menu-icon {
     width: 20px;
     height: 20px;
     flex-shrink: 0;
-    image-rendering: pixelated;
+}
+
+.start-menu-icon svg {
+    width: 20px;
+    height: 20px;
 }

@@ -1,0 +1,337 @@
+/* =========================================================
+   ANDREOS THEME — minimal replacement for 98.css
+   Provides: design tokens, base typography, form controls,
+   window chrome (.window / .title-bar / .window-body),
+   title-bar control icons, resize handles and field rows.
+   Square corners everywhere.
+   ========================================================= */
+
+:root {
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    --bg-desktop: #ebe9e6;
+    --surface: #ffffff;
+    --surface-muted: #f7f7f8;
+    --surface-hover: #f1f1f3;
+    --border: rgba(17, 24, 39, 0.08);
+    --border-strong: rgba(17, 24, 39, 0.16);
+
+    --text: #1f2937;
+    --text-secondary: #6b7280;
+    --text-muted: #9ca3af;
+
+    --accent: #d97757;
+    --accent-dark: #c4613f;
+    --accent-soft: rgba(217, 119, 87, 0.12);
+    --danger: #e5484d;
+
+    /* Colour accents */
+    --grad-accent: linear-gradient(110deg, #e2566a 0%, #e8714f 45%, #f0a04b 100%);
+    --grad-accent-vertical: linear-gradient(to top, #e2566a 0%, #e8714f 50%, #f0a04b 100%);
+    --ink: #1f1b2e;          /* deep plum used for the taskbar */
+    --ink-raised: rgba(255, 255, 255, 0.08);
+    --ink-hover: rgba(255, 255, 255, 0.16);
+    --on-ink: #f5f3ff;
+    --on-ink-muted: rgba(245, 243, 255, 0.6);
+
+    /* Square corners everywhere — kept as tokens so it's a one-line change later */
+    --radius-sm: 0;
+    --radius: 0;
+    --radius-lg: 0;
+
+    --shadow-sm: 0 1px 2px rgba(17, 24, 39, 0.06);
+    --shadow: 0 8px 24px rgba(17, 24, 39, 0.10), 0 2px 6px rgba(17, 24, 39, 0.06);
+    --shadow-lg: 0 20px 50px rgba(17, 24, 39, 0.18), 0 4px 12px rgba(17, 24, 39, 0.08);
+
+    --taskbar-height: 48px;
+    --titlebar-height: 40px;
+
+    /* Title-bar control glyphs (used as masks so they inherit currentColor) */
+    --icon-minimize: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2.5 7h9' stroke='black' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    --icon-maximize: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Crect x='2.75' y='2.75' width='8.5' height='8.5' stroke='black' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    --icon-restore: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Crect x='2.25' y='4.25' width='7.5' height='7.5' stroke='black' stroke-width='1.5' fill='none'/%3E%3Cpath d='M4.75 2.25h7v7' stroke='black' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    --icon-close: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M3 3l8 8M11 3l-8 8' stroke='black' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+}
+
+body {
+    font-family: var(--font);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Base form controls ──
+   :where() keeps specificity at zero so any component's own styles win. */
+:where(button, input, select, textarea) {
+    font: inherit;
+    color: inherit;
+}
+
+:where(button) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+:where(button):hover:not(:disabled) {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+}
+
+:where(button):active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+:where(button):disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+:where(button):focus-visible,
+:where(select, input, textarea):focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+:where(select, input[type="text"], input[type="number"], input[type="email"], textarea) {
+    padding: 7px 10px;
+    font-size: 13px;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+}
+
+:where(select) {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5l3 3 3-3' stroke='%236b7280' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    cursor: pointer;
+}
+
+:where(label) {
+    user-select: none;
+}
+
+/* ── Field rows (replaces 98.css .field-row / .field-row-stacked) ── */
+.field-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.field-row-stacked {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* ── Window ── */
+.window {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: 0;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s ease;
+}
+
+.window.active {
+    border-color: #e8714f;
+    box-shadow: var(--shadow-lg);
+}
+
+.window.maximized {
+    border: none;
+    box-shadow: none;
+}
+
+.title-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    height: var(--titlebar-height);
+    padding: 0 0 0 14px;
+    background: var(--surface-muted);
+    border-bottom: 1px solid var(--border);
+    cursor: default;
+    user-select: none;
+    transition: background 0.2s ease;
+}
+
+.window.active .title-bar {
+    background: var(--grad-accent);
+    border-bottom-color: transparent;
+}
+
+.title-bar-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.2s ease;
+}
+
+.window.active .title-bar-text {
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(120, 30, 20, 0.25);
+}
+
+.title-bar-controls {
+    display: flex;
+    align-self: stretch;
+}
+
+.title-bar-controls button {
+    width: 44px;
+    height: 100%;
+    padding: 0;
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.window.active .title-bar-controls button {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.title-bar-controls button::before {
+    content: '';
+    width: 14px;
+    height: 14px;
+    background-color: currentColor;
+    -webkit-mask: var(--icon) center / contain no-repeat;
+    mask: var(--icon) center / contain no-repeat;
+}
+
+.title-bar-controls button[aria-label="Minimize"] { --icon: var(--icon-minimize); }
+.title-bar-controls button[aria-label="Maximize"] { --icon: var(--icon-maximize); }
+.window.maximized .title-bar-controls button[aria-label="Maximize"] { --icon: var(--icon-restore); }
+.title-bar-controls button[aria-label="Close"] { --icon: var(--icon-close); }
+
+.title-bar-controls button:hover:not(:disabled) {
+    color: var(--text);
+    background: rgba(17, 24, 39, 0.06);
+    border: none;
+}
+
+.window.active .title-bar-controls button:hover:not(:disabled) {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.title-bar-controls button[aria-label="Close"]:hover,
+.window.active .title-bar-controls button[aria-label="Close"]:hover {
+    color: #ffffff;
+    background: var(--danger);
+}
+
+.title-bar-controls button:active:not(:disabled) {
+    transform: none;
+}
+
+.title-bar-controls button:disabled {
+    opacity: 0.3;
+}
+
+.window-body {
+    flex: 1;
+    min-height: 0; /* lets the body scroll inside the flex column */
+    overflow: auto;
+    padding: 16px;
+}
+
+/* ── Resize handles ── */
+.resize-handle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: transparent;
+    z-index: 20;
+}
+
+.resize-handle.bottom-right { right: 0; bottom: 0; cursor: se-resize; }
+.resize-handle.bottom-left  { left: 0;  bottom: 0; cursor: sw-resize; }
+.resize-handle.top-right    { right: 0; top: 0;    cursor: ne-resize; }
+.resize-handle.top-left     { left: 0;  top: 0;    cursor: nw-resize; }
+
+.resize-handle.top,
+.resize-handle.bottom {
+    left: 10px;
+    right: 10px;
+    height: 6px;
+    cursor: ns-resize;
+}
+
+.resize-handle.top { top: 0; }
+.resize-handle.bottom { bottom: 0; }
+
+.resize-handle.left,
+.resize-handle.right {
+    top: 10px;
+    bottom: 10px;
+    width: 6px;
+    cursor: ew-resize;
+}
+
+.resize-handle.left { left: 0; }
+.resize-handle.right { right: 0; }
+
+/* ── Scrollbars ── */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(217, 119, 87, 0.45) transparent;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(217, 119, 87, 0.45);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent);
+}

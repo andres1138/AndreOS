@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import Window from "./Window.jsx";
-import Content1 from "./Content1.jsx";
 import Contact from './Contact.jsx';
 import Portfolio from './Portfolio.jsx';
 import Plinko from './Plinko.jsx';
@@ -14,7 +13,6 @@ import TaskbarClock from "./TaskbarClock.jsx";
 import StartMenu from "./StartMenu.jsx";
 import './App.css'
 
-import profileIcon from "./icons/UselessButtonsIcon.png";
 import profile_Icon from "./icons/ProfileIconNew.png";
 import contact_icon from "./icons/contact.png"
 import displayProperties from "./icons/DisplayPropertiesNew.png";
@@ -36,17 +34,6 @@ function App() {
   };
 
   const availableWindows = [
-    {
-      id: 1,
-      title: "Useless Buttons",
-      icon: profileIcon,
-      content: <Content1 />,
-      resizable: true,
-      defaultWidth: 400,
-      defaultHeight: 300,
-      minWidth: 250,
-      minHeight: 200,
-    },
     {
       id: 2,
       title: "Display Properties",
@@ -199,25 +186,16 @@ function App() {
           return (
             <div
               key={id}
+              className="taskbar-item"
               onClick={() => handleRestore(id)}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                padding: "0px 6px",
-                marginRight: "4px",
-                border: "1px solid #808080",
-                background: "#c0c0c0",
-                cursor: "pointer",
-                userSelect: "none",
-                height: "22px",
-                boxSizing: "border-box",
-              }}
             >
-              {win.iconComponent
-                ? <div style={{ width: 20, height: 20, marginRight: 4, display: "flex", alignItems: "center" }}>{win.iconComponent}</div>
-                : <img src={win.icon} alt={win.title} style={{ width: 20, height: 20, marginRight: 4 }} />
-              }
-              <span style={{ fontSize: "12px" }}>{win.title}</span>
+              <div className="taskbar-item-icon">
+                {win.iconComponent
+                  ? win.iconComponent
+                  : <img src={win.icon} alt={win.title} />
+                }
+              </div>
+              <span>{win.title}</span>
             </div>
           );
         })}
