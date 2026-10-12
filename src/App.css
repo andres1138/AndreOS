@@ -271,3 +271,19 @@
     border-color: transparent;
     filter: brightness(0.95);
 }
+/* ── Phones: compact taskbar (icons only for minimized windows, no date) ── */
+@media (max-width: 640px) {
+    .taskbar {
+        gap: 4px;
+        padding: 0 6px;
+    }
+
+    .taskbar-item {
+        padding: 0 8px;
+    }
+
+    .taskbar-item span,
+    .taskbar-clock__date {
+        display: none;
+    }
+}

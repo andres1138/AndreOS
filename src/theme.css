@@ -65,6 +65,50 @@ body,
     height: 100%;
 }
 
+/* ── Touch / mobile ──
+   The desktop is a fixed "app" surface: no page scroll, bounce or tap flash. */
+html,
+body {
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Use the dynamic viewport so mobile browser toolbars don't hide the taskbar */
+.desktop {
+    height: 100dvh !important;
+}
+
+/* Surfaces we drag ourselves must not pan or zoom the page */
+.title-bar,
+.resize-handle,
+.desktop-icon {
+    touch-action: none;
+}
+
+/* Inside windows, allow normal finger scrolling */
+.window-body {
+    touch-action: pan-x pan-y;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Bigger hit areas for fingers */
+@media (pointer: coarse) {
+    .resize-handle.top-left,
+    .resize-handle.top-right,
+    .resize-handle.bottom-left,
+    .resize-handle.bottom-right {
+        width: 22px;
+        height: 22px;
+    }
+
+    .resize-handle.left,
+    .resize-handle.right { width: 14px; }
+
+    .resize-handle.top,
+    .resize-handle.bottom { height: 14px; }
+}
+
 body {
     font-family: var(--font);
     font-size: 14px;

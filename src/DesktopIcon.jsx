@@ -1,14 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
+
+// Movement (px) beyond which a press counts as a drag rather than a tap.
+const TAP_SLOP = 6;
 
 const DesktopIcon = ({ id, title, icon, iconComponent, isSelected, onSelect, onDoubleClick, initialX, initialY }) => {
     const [position, setPosition] = useState({ x: initialX, y: initialY });
-    const [dragging, setDragging] = useState(false);
     const [isPressed, setIsPressed] = useState(false);
-    const [offset, setOffset] = useState({ x: 0, y: 0 });
-    const dragStartPos = useRef({ x: 0, y: 0 });
+    const iconRef = useRef(null);
 
-    const handleMouseDown = (e) => {
-        // Prevent default browser text selection while allowing custom drag/click
+    // Pointer events cover mouse, touch and pen with one code path.
+    const handlePointerDown = (e) => {
+        if (e.pointerType === "mouse" && e.button !== 0) return;
+        // Prevent default browser text selection / scrolling while allowing custom drag/click
         e.preventDefault();
         e.stopPropagation();
 
@@ -16,44 +19,49 @@ const DesktopIcon = ({ id, title, icon, iconComponent, isSelected, onSelect, onD
             onSelect(id);
         }
         setIsPressed(true);
-        setDragging(true);
-        dragStartPos.current = { x: e.clientX, y: e.clientY };
-        setOffset({
-            x: e.clientX - position.x,
-            y: e.clientY - position.y,
-        });
-    };
 
-    const handleMouseMove = (e) => {
-        if (!dragging) return;
-        setPosition({
-            x: e.clientX - offset.x,
-            y: e.clientY - offset.y,
-        });
-    };
+        const start = { x: e.clientX, y: e.clientY };
+        const offset = { x: e.clientX - position.x, y: e.clientY - position.y };
+        const isTouch = e.pointerType !== "mouse";
+        let moved = false;
 
-    const handleMouseUp = () => {
-        setDragging(false);
-        setIsPressed(false);
-    };
+        const onPointerMove = (ev) => {
+            if (!moved && Math.hypot(ev.clientX - start.x, ev.clientY - start.y) > TAP_SLOP) {
+                moved = true;
+            }
+            if (!moved) return;
 
-    useEffect(() => {
-        if (dragging) {
-            document.addEventListener("mousemove", handleMouseMove);
-            document.addEventListener("mouseup", handleMouseUp);
-        } else {
-            document.removeEventListener("mousemove", handleMouseMove);
-            document.removeEventListener("mouseup", handleMouseUp);
-        }
-
-        return () => {
-            document.removeEventListener("mousemove", handleMouseMove);
-            document.removeEventListener("mouseup", handleMouseUp);
+            // Keep the icon inside the desktop area
+            const el = iconRef.current;
+            const parent = el?.parentElement;
+            const maxX = parent ? parent.clientWidth - el.offsetWidth : Infinity;
+            const maxY = parent ? parent.clientHeight - el.offsetHeight : Infinity;
+            setPosition({
+                x: Math.max(0, Math.min(maxX, ev.clientX - offset.x)),
+                y: Math.max(0, Math.min(maxY, ev.clientY - offset.y)),
+            });
         };
-    }, [dragging, offset]);
+
+        const onPointerUp = (ev) => {
+            document.removeEventListener("pointermove", onPointerMove);
+            document.removeEventListener("pointerup", onPointerUp);
+            document.removeEventListener("pointercancel", onPointerUp);
+            setIsPressed(false);
+
+            // On touch screens a single tap opens the app (double-tap is unreliable on mobile).
+            if (isTouch && !moved && ev.type === "pointerup" && onDoubleClick) {
+                onDoubleClick();
+            }
+        };
+
+        document.addEventListener("pointermove", onPointerMove);
+        document.addEventListener("pointerup", onPointerUp);
+        document.addEventListener("pointercancel", onPointerUp);
+    };
 
     return (
         <div
+            ref={iconRef}
             className={`desktop-icon ${isSelected ? "selected" : ""} ${isPressed ? "pressed" : ""}`}
             style={{
                 position: "absolute",
@@ -64,7 +72,8 @@ const DesktopIcon = ({ id, title, icon, iconComponent, isSelected, onSelect, onD
                 cursor: "default",
                 userSelect: "none",
             }}
-            onMouseDown={handleMouseDown}
+            onPointerDown={handlePointerDown}
+            onClick={(e) => e.stopPropagation()}
             onDoubleClick={(e) => {
                 e.stopPropagation();
                 if (onDoubleClick) {
@@ -84,4 +93,3 @@ const DesktopIcon = ({ id, title, icon, iconComponent, isSelected, onSelect, onD
 };
 
 export default DesktopIcon;
-

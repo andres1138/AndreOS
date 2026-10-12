@@ -111,6 +111,9 @@ function App() {
   ];
 
 
+  // How many 100px icon slots fit across the screen (wraps into rows on phones)
+  const iconCols = Math.max(1, Math.floor((window.innerWidth - 20) / 100));
+
   const handleOpenWindow = (win) => {
     if (!openWindows.find((w) => w.id === win.id)) {
       setOpenWindows([...openWindows, win]);
@@ -143,8 +146,8 @@ function App() {
           iconComponent={win.iconComponent}
           isSelected={selectedIconId === win.id}
           onSelect={(id) => setSelectedIconId(id)}
-          initialX={20 + idx * 100}
-          initialY={20}
+          initialX={20 + (idx % iconCols) * 100}
+          initialY={20 + Math.floor(idx / iconCols) * 100}
           onDoubleClick={() => {
             setSelectedIconId(win.id);
             handleOpenWindow(win);
